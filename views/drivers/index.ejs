@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drivers</title>
+</head>
+<body>
+    <h1>All Drivers</h1>
+    <ul>
+        <% for(let i = 0; i < drivers.length; i++) { %>
+            <a href="/driver/<%= drivers[i].id %>"></a><li><%= drivers[i].name %> - <%= drivers[i].email %> - <%= drivers[i].id %></li>
+        <% } %>
+    </ul>
+</body>
+</html>
