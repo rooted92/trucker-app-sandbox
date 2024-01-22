@@ -14,36 +14,42 @@ let drivers = [
         id: uuid(),
         name: 'Lewis Hamilton',
         email: 'lhamilton@gmail.com',
+        truckId: '1012',
         company: 'Express Transport' 
     },
     {
         id: uuid(),
         name: 'Max Verstappen',
         email: 'mverstappen@gmail.com',
+        truckId: '2038',
         company: 'Express Transport'
     },
     {
         id: uuid(),
         name: 'Valtteri Bottas',
         email: 'vbottas@gmail.com',
+        truckId: '1045',
         company: 'Express Transport'
     },
     {
         id: uuid(),
         name: 'Sergio Perez',
         email: 'sperez@gmail.com',
+        truckId: '1050',
         company: 'Express Transport'
     },
     {
         id: uuid(),
         name: 'Lando Norris',
         email: 'lnorris@gmail.com',
+        truckId: '2014',
         company: 'Express Transport'
     },
     {
         id: uuid(),
         name: 'Charles Leclerc',
         email: 'cleclerc@gmail.com',
+        truckId: '2016',
         company: 'Express Transport'
     }
 ]
@@ -57,6 +63,10 @@ app.get('/driver/:id', (req, res) => {
     const driver = drivers.find(d => d.id === id);
     res.render('drivers/driver.ejs', { driver });
     res.send(driver);
+});
+
+app.get('/driver/new', (req, res) => {
+    res.render('drivers/new-driver.ejs');
 });
 
 app.listen(3000, () => {

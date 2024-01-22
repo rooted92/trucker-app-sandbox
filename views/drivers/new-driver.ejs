@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Driver</title>
+</head>
+<body>
+    <h1>Add New Driver</h1>
+    <form action="/driver/create" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" placeholder="Enter driver name">
+        <br>
+        <label for="truckId">Truck #:</label>
+        <input type="text" name="truckId" id="truckId" placeholder="Enter truck #">
+        <br>
+        <label for="company">Company:</label>
+        <input type="text" name="company" id="company" placeholder="Enter company name">
+        <br>
+        <label for="email">Email:</label>
+        <input type="text" name="email" id="email" placeholder="Enter email address">
+        <br>
+        <input type="submit" value="Add Driver">
+</body>
+</html>

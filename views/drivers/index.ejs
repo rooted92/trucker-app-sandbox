@@ -9,8 +9,9 @@
     <h1>All Drivers</h1>
     <ul>
         <% for(let i = 0; i < drivers.length; i++) { %>
-            <a href="/driver/<%= drivers[i].id %>"></a><li><%= drivers[i].name %> - <%= drivers[i].email %> - <%= drivers[i].id %></li>
+            <li><a href="/driver/<%= drivers[i].id %>" title="Click to view driver details"><%= drivers[i].name %></a> - <%= drivers[i].email %> - <%= drivers[i].id %></li>
         <% } %>
     </ul>
+    <a href="/driver/new-driver">Add New Driver</a>
 </body>
 </html>
