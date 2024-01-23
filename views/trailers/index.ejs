@@ -1,0 +1,19 @@
+<%- include('../partials/head') %>
+<%- include('../partials/navbar') %>
+
+    <div class="container flex-grow-1">
+        <div class="container">
+            <h1>Trailers</h1>
+            <ul>
+                <% for(let trailer of trailers) { %>
+                    <li>
+                        <a href="/trailer/<%= trailer.id %>" title="Click to view trailer details"><%= trailer.trailerId %></a> - <%= trailer.trailerStatus %>
+                    </li>
+                    <% } %>
+            </ul>
+            <a href="/trailer/new">Add New Trailer</a>
+        </div>
+
+    </div>
+
+<%- include('../partials/footer') %>

@@ -54,6 +54,54 @@ let drivers = [
     }
 ]
 
+let trailers = [
+    {
+        id: uuid(),
+        trailerId: '1001',
+        trailerType: 'Dry Van',
+        trailerStatus: 'Available',
+        trailerLocation: 'Atlanta, GA'
+    },
+    {
+        id: uuid(),
+        trailerId: '1002',
+        trailerType: 'Dry Van',
+        trailerStatus: 'In Transit',
+        trailerLocation: 'Modesto, CA'
+    },
+    {
+        id: uuid(),
+        trailerId: '1003',
+        trailerType: 'Reefer',
+        trailerStatus: 'In Transit',
+        trailerLocation: 'White City, OR'
+    },
+    {
+        id: uuid(),
+        trailerId: '1004',
+        trailerType: 'Tanker',
+        trailerStatus: 'Available',
+        trailerLocation: 'Santa Rosa, CA'
+    },
+    {
+        id: uuid(),
+        trailerId: '1005',
+        trailerType: 'Dry Van',
+        trailerStatus: 'Docked',
+        trailerLocation: 'Norcross, GA'
+    },
+    {
+        id: uuid(),
+        trailerId: '1006',
+        trailerType: 'Reefer',
+        trailerStatus: 'In Transit',
+        trailerLocation: 'Atlanta, GA'
+    }
+
+]
+
+// DRIVER ROUTES***************************************************************************************
+
 // Home route
 app.get('/', (req, res) => {
     res.render('dashboard.ejs');
@@ -108,6 +156,13 @@ app.delete('/driver/:id', (req, res) => {
     const { id } = req.params;
     drivers = drivers.filter(d => d.id !== id);
     res.redirect('/drivers');
+});
+
+// TRAILER ROUTES***************************************************************************************
+
+// All Trailers route
+app.get('/trailers', (req, res) => {
+    res.render('trailers/index.ejs', { trailers });
 });
 
 app.listen(3000, () => {
