@@ -1,12 +1,18 @@
 <%- include('../partials/head') %>
 <%- include('../partials/navbar') %>
 
-    <h1>All Drivers</h1>
-    <ul>
-        <% for(let i = 0; i < drivers.length; i++) { %>
-            <li><a href="/driver/<%= drivers[i].id %>" title="Click to view driver details"><%= drivers[i].name %></a> - <%= drivers[i].company %></li>
-        <% } %>
-    </ul>
-    <a href="/driver/new">Add New Driver</a>
+<div class="container flex-grow-1">
+    
 
+    <div class="container">
+        <h1>Drivers</h1>
+        <ul>
+            <% for(let i = 0; i < drivers.length; i++) { %>
+                <li><a href="/driver/<%= drivers[i].id %>" title="Click to view driver details"><%= drivers[i].name %></a> - <%= drivers[i].company %></li>
+            <% } %>
+        </ul>
+        <a href="/driver/new">Add New Driver</a>
+    </div>
+</div>
+    
 <%- include('../partials/footer') %>
