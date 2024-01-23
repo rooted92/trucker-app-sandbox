@@ -190,6 +190,25 @@ app.get('/trailer/:id/edit', (req, res) => {
     res.render('trailers/edit-trailer.ejs', { trailerToUpdate });
 });
 
+// Update trailer route
+app.patch('/trailer/:id', (req, res) => {
+    const { id } = req.params;
+    const trailerToUpdate = req.body;
+    const trailer = trailers.find(t => t.id === id);
+    trailer.trailerId = trailerToUpdate.trailerId;
+    trailer.trailerType = trailerToUpdate.trailerType;
+    trailer.trailerStatus = trailerToUpdate.trailerStatus;
+    trailer.trailerLocation = trailerToUpdate.trailerLocation;
+    res.redirect('/trailers');
+});
+
+// Delete trailer route
+app.delete('/trailer/:id', (req, res) => {
+    const { id } = req.params;
+    trailers = trailers.filter(t => t.id !== id);
+    res.redirect('/trailers');
+});
+
 app.listen(3000, () => {
     console.log("App is listening on port 3000");
 });

@@ -9,6 +9,14 @@
         <p><b>Trailer Status:</b> <%= trailer.trailerStatus %></p>
         <p><b>Trailer Location:</b> <%= trailer.trailerLocation %></p>
 
+        <a href="/trailers">Back to Index</a>
+        <br>
+        <a href="/trailer/<%= trailer.id %>/edit">Edit Trailer</a>
+        <br>
+        <form class="mt-3" method="POST" action="/trailer/<%= trailer.id %>?_method=DELETE">
+            <input class="bg-danger text-light border border-0 rounded p-1 px-2" type="submit" value="Delete Trailer">
+        </form>
+
     </div>
 
 <%- include('../partials/footer') %>
