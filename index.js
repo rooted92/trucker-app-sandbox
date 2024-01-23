@@ -183,6 +183,13 @@ app.get('/trailer/:id', (req, res) => {
     res.render('trailers/trailer.ejs', { trailer });
 });
 
+// Edit trailer route
+app.get('/trailer/:id/edit', (req, res) => {
+    const { id } = req.params;
+    const trailerToUpdate = trailers.find(t => t.id === id);
+    res.render('trailers/edit-trailer.ejs', { trailerToUpdate });
+});
+
 app.listen(3000, () => {
     console.log("App is listening on port 3000");
 });
