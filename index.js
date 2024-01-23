@@ -80,8 +80,29 @@ app.get('/driver/:id', (req, res) => {
 });
 
 // Edit driver route
+app.get('/driver/:id/edit', (req, res) => {
+    const { id } = req.params;
+    const driverToUpdate = drivers.find(d => d.id === id);
+    res.render('drivers/edit-driver.ejs', { driverToUpdate });
+});
+
+// Update driver route
 app.patch('/driver/:id', (req, res) => {
-    y
+    const { id } = req.params;
+    const updatedDriver = req.body;
+    const driver = drivers.find(d => d.id === id);
+    driver.name = updatedDriver.name;
+    driver.email = updatedDriver.email;
+    driver.truckId = updatedDriver.truckId;
+    driver.company = updatedDriver.company;
+    res.redirect('/drivers');
+});
+
+// Delete driver route
+app.delete('/driver/:id', (req, res) => {
+    const { id } = req.params;
+    drivers = drivers.filter(d => d.id !== id);
+    res.redirect('/drivers');
 });
 
 app.listen(3000, () => {

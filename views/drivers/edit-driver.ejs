@@ -3,23 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit | <%= driver.name %></title>
+    <title>Edit | <%= driverToUpdate.name %></title>
 </head>
 <body>
     <h1>Edit Driver</h1>
-    <form action="/drivers/<%= driver.id %>?_method=PATCH">
+    <form method="POST" action="/driver/<%= driverToUpdate.id %>?_method=PATCH">
         <label for="name">Name:</label>
-        <input type="text" name="name" id="name" value="<%= driver.name %>">
+        <input type="text" name="name" id="name" value="<%= driverToUpdate.name %>">
         <br>
         <label for="truckId">Truck #:</label>
-        <input type="text" name="truckId" id="truckId" value="<%= driver.truckId %>">
+        <input type="text" name="truckId" id="truckId" value="<%= driverToUpdate.truckId %>">
         <br>
         <label for="company">Company:</label>
-        <input type="text" name="company" id="company" value="<%= driver.company %>">
+        <input type="text" name="company" id="company" value="<%= driverToUpdate.company %>">
         <br>
         <label for="email">Email:</label>
-        <input type="text" name="email" id="email" value="<%= driver.email %>">
+        <input type="text" name="email" id="email" value="<%= driverToUpdate.email %>">
         <br>
         <input type="submit" value="Update Driver">
+    </form>
+    <br>
+    <a href="/driver/<%= driverToUpdate.id %>">Back to Driver Details</a>
 </body>
 </html>
