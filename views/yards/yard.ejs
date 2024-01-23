@@ -1,0 +1,21 @@
+<%- include('../partials/head') %>
+<%- include('../partials/navbar') %>
+
+    <div class="container flex-grow-1">
+
+        <h1>Yard Details</h1>
+        <p><b>Yard Name:</b> <%= yard.yardName %></p>
+        <p><b>Yard Location:</b> <%= yard.yardLocation %></p>
+        <p><b>Yard Capacity:</b> <%= yard.yardCapacity %></p>
+        <p><b>Yard Status:</b> <%= yard.yardStatus %></p>
+
+
+        <a href="/yards">Back to Index</a>
+        <br>
+        <a href="/yard/<%= yard.id %>/edit">Edit Yard</a>
+        <br>
+        <form class="mt-3" method="POST" action="/yard/<%= yard.id %>?_method=DELETE">
+            <input class="bg-danger text-light border border-0 rounded p-1 px-2" type="submit" value="Delete Yard">
+        </form>
+
+    </div>

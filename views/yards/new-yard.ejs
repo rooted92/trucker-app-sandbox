@@ -1,0 +1,26 @@
+<%- include('../partials/head') %>
+<%- include('../partials/navbar') %>
+
+<div class="container flex-grow-1">
+    <h1>Add New Yard</h1>
+    <form action="/yards" method="POST" >
+        <label for="yardName">Yard Name:</label>
+        <input type="text" name="yardName" id="yardName" placeholder="Enter yard name">
+        <br>
+        <label for="yardLocation">Yard Location:</label>
+        <input type="text" name="yardLocation" id="yardLocation" placeholder="Enter yard location">
+        <br>
+        <label for="yardCapacity">Yard Capacity:</label>
+        <input type="text" name="yardCapacity" id="yardCapacity" placeholder="Enter yard capacity">
+        <br>
+        <label for="yardStatus">Yard Status:</label>
+        <input type="text" name="yardStatus" id="yardStatus" placeholder="Enter yard status">
+        <br>
+        <input type="submit" value="Add Yard">
+    </form>
+
+    <br>
+    <a href="/yards">Back to Index</a>
+</div>
+
+<%- include('../partials/footer') %>

@@ -1,0 +1,29 @@
+<%- include('../partials/head') %>
+<%- include('../partials/navbar') %>
+
+<div class="container flex-grow-1">
+    <h1>Edit Yard</h1>
+    <form action="/yard/<%= yard.id %>?_method=PATCH" method="POST">
+        <div class="form-group">
+            <label for="yardName">Yard Name</label>
+            <input type="text" class="form-control" id="yardName" name="yardName" value="<%= yard.yardName %>">
+        </div>
+        <div class="form-group">
+            <label for="yardLocation">Yard Location</label>
+            <input type="text" class="form-control" id="yardLocation" name="yardLocation" value="<%= yard.yardLocation %>">
+        </div>
+        <div class="form-group">
+            <label for="yardCapacity">Yard Capacity</label>
+            <input type="text" class="form-control" id="yardCapacity" name="yardCapacity" value="<%= yard.yardCapacity %>">
+        </div>
+        <div class="form-group">
+            <label for="yardStatus">Yard Status</label>
+            <input type="text" class="form-control" id="yardStatus" name="yardStatus" value="<%= yard.yardStatus %>">
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+
+    </form>
+
+    <br>
+    <a href="/yard/<%- yard.id %>">Back to Yard Details</a>
+</div>

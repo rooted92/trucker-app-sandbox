@@ -99,6 +99,57 @@ let trailers = [
     }
 ]
 
+let yards = [
+    {
+        id: uuid(),
+        yardName: 'Napa Yard',
+        yardLocation: 'Napa, CA',
+        yardCapacity: '40',
+        yardStatus: 'Active'
+    },
+    {
+        id: uuid(),
+        yardName: 'Modesto Yard',
+        yardLocation: 'Modesto, CA',
+        yardCapacity: '280',
+        yardStatus: 'Active'
+    },
+    {
+        id: uuid(),
+        yardName: 'Santa Rosa Skikos Yard',
+        yardLocation: 'Santa Rosa, CA',
+        yardCapacity: '80',
+        yardStatus: 'Active'
+    },
+    {
+        id: uuid(),
+        yardName: 'White City Yard',
+        yardLocation: 'White City, OR',
+        yardCapacity: '150',
+        yardStatus: 'Active'
+    },
+    {
+        id: uuid(),
+        yardName: 'Norcross Yard',
+        yardLocation: 'Norcross, GA',
+        yardCapacity: '50',
+        yardStatus: 'Active'
+    },
+    {
+        id: uuid(),
+        yardName: 'Atlanta Yard',
+        yardLocation: 'Atlanta, GA',
+        yardCapacity: '300',
+        yardStatus: 'Active'
+    },
+    {
+        id: uuid(),
+        yardName: 'Encore',
+        yardLocation: 'Fairfield, CA',
+        yardCapacity: '100',
+        yardStatus: 'Active'
+    }
+]
 // Home route
 app.get('/', (req, res) => {
     res.render('dashboard.ejs');
@@ -208,6 +259,60 @@ app.delete('/trailer/:id', (req, res) => {
     trailers = trailers.filter(t => t.id !== id);
     res.redirect('/trailers');
 });
+
+// YARD ROUTES***************************************************************************************
+
+// All Yard route
+app.get('/yards', (req, res) => {
+    res.render('yards/index.ejs', { yards });
+});
+
+// Add new yard route
+app.get('/yard/new', (req, res) => {
+    res.render('yards/new-yard.ejs');
+});
+
+// Create new yard route
+app.post('/yards', (req, res) => {
+    const { yardName, yardLocation, yardCapacity, yardStatus} = req.body;
+    yards.push({yardName, yardLocation, yardCapacity, yardStatus, id: uuid()});
+    res.redirect('/yards');
+});
+
+// Single Yard route
+app.get('/yard/:id', (req, res) => {
+    const { id } = req.params;
+    const yard = yards.find(y => y.id === id);
+    res.render('yards/yard.ejs', { yard });
+});
+
+// Edit Yard route
+app.get('/yard/:id/edit', (req, res) => {
+    const { id } = req.params;
+    const yard = yards.find(y => y.id === id);
+    res.render('yards/edit-yard.ejs', { yard });
+})
+
+// Update Yard route
+app.patch('/yard/:id', (req, res) => {
+    const { id } = req.params;
+    const yardToUpdate = req.body;
+    const yard = yards.find(y => y.id === id);
+    yard.yardName = yardToUpdate.yardName;
+    yard.yardLocation = yardToUpdate.yardLocation;
+    yard.yardCapacity = yardToUpdate.yardCapacity;
+    yard.yardStatus = yardToUpdate.yardStatus;
+    res.redirect('/yards');
+})
+
+// Delte Yard route
+app.delete('/yard/:id', (req, res) => {
+    const { id } = req.params;
+    yards = yards.filter(y => y.id !== id);
+    res.redirect('/yards');
+})
+
+// Start server
 
 app.listen(3000, () => {
     console.log("App is listening on port 3000");
