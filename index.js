@@ -54,19 +54,34 @@ let drivers = [
     }
 ]
 
+// All Drivers route
 app.get('/drivers', (req, res) => {
     res.render('drivers/index.ejs', { drivers });
 });
 
+// Add new driver route
+// A more specific route should be placed above a more general route, so this route should be placed above the view single driver route (see below)
+app.get('/driver/new', (req, res) => {
+    res.render('drivers/new-driver.ejs');
+});
+
+// Create new driver route
+app.post('/drivers', (req, res) => {
+    const { name, email, truckId, company } = req.body;
+    drivers.push({ name, email, truckId, company, id: uuid() });
+    res.redirect('/drivers');
+});
+
+// View single driver route
 app.get('/driver/:id', (req, res) => {
     const { id } = req.params;
     const driver = drivers.find(d => d.id === id);
     res.render('drivers/driver.ejs', { driver });
-    res.send(driver);
 });
 
-app.get('/driver/new', (req, res) => {
-    res.render('drivers/new-driver.ejs');
+// Edit driver route
+app.patch('/driver/:id', (req, res) => {
+    y
 });
 
 app.listen(3000, () => {

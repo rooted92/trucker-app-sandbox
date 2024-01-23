@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit | <%= driver.name %></title>
+</head>
+<body>
+    <h1>Edit Driver</h1>
+    <form action="/drivers/<%= driver.id %>?_method=PATCH">
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" value="<%= driver.name %>">
+        <br>
+        <label for="truckId">Truck #:</label>
+        <input type="text" name="truckId" id="truckId" value="<%= driver.truckId %>">
+        <br>
+        <label for="company">Company:</label>
+        <input type="text" name="company" id="company" value="<%= driver.company %>">
+        <br>
+        <label for="email">Email:</label>
+        <input type="text" name="email" id="email" value="<%= driver.email %>">
+        <br>
+        <input type="submit" value="Update Driver">
+</body>
+</html>

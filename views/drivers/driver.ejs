@@ -10,7 +10,9 @@
     <p><b>Truck #:</b><%= driver.truckId %></p>
     <p><b>Drives for:</b> <%= driver.company %></p>
     <p><b>Contact:</b> <%= driver.email %></p>
-    
+
     <a href="/drivers">Back to Index</a>
+    <br>
+    <a href="/drivers/<%= driver.id %>/edit">Edit Driver</a>
 </body>
 </html>
