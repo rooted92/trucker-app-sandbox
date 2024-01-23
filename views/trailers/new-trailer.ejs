@@ -1,0 +1,27 @@
+<%- include('../partials/head') %>
+<%- include('../partials/navbar') %>
+
+<div class="container flex-grow-1">
+    
+
+    <h1>Add New Trailer</h1>
+    <form action="/trailers" method="POST">
+        <label for="trailerId">Trailer Number:</label>
+        <input type="text" name="trailerId" id="trailerId" placeholder="Enter trailer number">
+        <br>
+        <label for="trailerType">Trailer Type:</label>
+        <input type="text" name="trailerType" id="trailerType" placeholder="Enter trailer type">
+        <br>
+        <label for="trailerStatus">Trailer Status:</label>
+        <input type="text" name="trailerStatus" id="trailerStatus" placeholder="Enter trailer status">
+        <br>
+        <label for="trailerLocation">Trailer Location:</label>
+        <input type="text" name="trailerLocation" id="trailerLocation" placeholder="Enter trailer location">
+        <br>
+        <input type="submit" value="Add Trailer">
+    </form>
+    <br>
+    <a href="/trailers">Back to Index</a>
+</div>
+
+<%- include('../partials/footer') %>

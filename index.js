@@ -97,15 +97,14 @@ let trailers = [
         trailerStatus: 'In Transit',
         trailerLocation: 'Atlanta, GA'
     }
-
 ]
-
-// DRIVER ROUTES***************************************************************************************
 
 // Home route
 app.get('/', (req, res) => {
     res.render('dashboard.ejs');
 });
+
+// DRIVER ROUTES***************************************************************************************
 
 // All Drivers route
 app.get('/drivers', (req, res) => {
@@ -163,6 +162,25 @@ app.delete('/driver/:id', (req, res) => {
 // All Trailers route
 app.get('/trailers', (req, res) => {
     res.render('trailers/index.ejs', { trailers });
+});
+
+// Add new trailer route
+app.get('/trailer/new', (req, res) => {
+    res.render('trailers/new-trailer.ejs');
+});
+
+// Create new trailer route
+app.post('/trailers', (req, res) => {
+    const { trailerId, trailerType, trailerStatus, trailerLocation } = req.body;
+    trailers.push({ trailerId, trailerType, trailerStatus, trailerLocation, id: uuid() });
+    res.redirect('/trailers');
+});
+
+// Single Trailer route
+app.get('/trailer/:id', (req, res) => {
+    const { id } = req.params;
+    const trailer = trailers.find(t => t.id === id);
+    res.render('trailers/trailer.ejs', { trailer });
 });
 
 app.listen(3000, () => {
