@@ -15,18 +15,21 @@ To run the project, follow these steps:
 
 The website allows you to perform CRUD operations on trailers, yards, and drivers. Here are the available routes and HTTP verbs:
 
+### Trailers
 - **GET** `/trailers`: Retrieves all trailers.
 - **GET** `/trailers/:id`: Retrieves a specific trailer by ID.
 - **POST** `/trailers`: Creates a new trailer.
 - **PATCH** `/trailers/:id`: Updates a specific trailer by ID.
 - **DELETE** `/trailers/:id`: Deletes a specific trailer by ID.
 
+### Yards
 - **GET** `/yards`: Retrieves all yards.
 - **GET** `/yards/:id`: Retrieves a specific yard by ID.
 - **POST** `/yards`: Creates a new yard.
 - **PATCH** `/yards/:id`: Updates a specific yard by ID.
 - **DELETE** `/yards/:id`: Deletes a specific yard by ID.
 
+### Drivers
 - **GET** `/drivers`: Retrieves all drivers.
 - **GET** `/drivers/:id`: Retrieves a specific driver by ID.
 - **POST** `/drivers`: Creates a new driver.
