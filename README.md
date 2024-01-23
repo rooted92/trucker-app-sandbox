@@ -9,7 +9,7 @@ To run the project, follow these steps:
 1. Clone or fork the repository.
 2. Run `npm install` to generate the `node_modules` folder.
 3. Install Nodemon globally if you haven't already: `npm install -g nodemon`.
-4. Launch the server on localhost:3000 by running `node index.js` or if you installed Nodemon run 'nodemon index.js'.
+4. Launch the server on localhost:3000 by running `node index.js` or if you installed Nodemon run `nodemon index.js`.
 
 ## Usage
 
