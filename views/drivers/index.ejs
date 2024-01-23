@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Drivers</title>
-</head>
-<body>
+<%- include('../partials/head') %>
+<%- include('../partials/navbar') %>
+
     <h1>All Drivers</h1>
     <ul>
         <% for(let i = 0; i < drivers.length; i++) { %>
@@ -13,5 +8,5 @@
         <% } %>
     </ul>
     <a href="/driver/new">Add New Driver</a>
-</body>
-</html>
+
+<%- include('../partials/footer') %>

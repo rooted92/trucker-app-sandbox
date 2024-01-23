@@ -54,6 +54,11 @@ let drivers = [
     }
 ]
 
+// Home route
+app.get('/', (req, res) => {
+    res.render('dashboard.ejs');
+});
+
 // All Drivers route
 app.get('/drivers', (req, res) => {
     res.render('drivers/index.ejs', { drivers });

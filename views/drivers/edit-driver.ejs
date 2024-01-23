@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit | <%= driverToUpdate.name %></title>
-</head>
-<body>
+<%- include('../partials/head') %>
+<%- include('../partials/navbar') %>
+
     <h1>Edit Driver</h1>
     <form method="POST" action="/driver/<%= driverToUpdate.id %>?_method=PATCH">
         <label for="name">Name:</label>
@@ -24,5 +19,5 @@
     </form>
     <br>
     <a href="/driver/<%= driverToUpdate.id %>">Back to Driver Details</a>
-</body>
-</html>
+
+<%- include('../partials/footer') %>
