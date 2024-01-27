@@ -13,42 +13,36 @@ mongoose.connect('mongodb://localhost:27017/lunaLink')
 
 let drivers = [
     {
-        id: uuid(),
         name: 'Lewis Hamilton',
         email: 'lhamilton@gmail.com',
         truckId: '1012',
         company: 'Express Transport' 
     },
     {
-        id: uuid(),
         name: 'Max Verstappen',
         email: 'mverstappen@gmail.com',
         truckId: '2038',
         company: 'Express Transport'
     },
     {
-        id: uuid(),
         name: 'Valtteri Bottas',
         email: 'vbottas@gmail.com',
         truckId: '1045',
         company: 'Express Transport'
     },
     {
-        id: uuid(),
         name: 'Sergio Perez',
         email: 'sperez@gmail.com',
         truckId: '1050',
         company: 'Express Transport'
     },
     {
-        id: uuid(),
         name: 'Lando Norris',
         email: 'lnorris@gmail.com',
         truckId: '2014',
         company: 'Express Transport'
     },
     {
-        id: uuid(),
         name: 'Charles Leclerc',
         email: 'cleclerc@gmail.com',
         truckId: '2016',
@@ -56,13 +50,13 @@ let drivers = [
     }
 ]
 
-const addSeedDrivers = async () => {
-    try{
-        await Driver.deleteMany({});
-    } catch (err) {
-        console.log(err);
-    }
-};
+Driver.insertMany(drivers)
+.then(res => {
+    console.log(res);
+})
+.catch(e => {
+    console.log(e);
+});
 
 let trailers = [
     {
