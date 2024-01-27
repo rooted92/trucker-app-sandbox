@@ -5,8 +5,10 @@ const methodOverride = require('method-override');
 const { v4: uuid } = require('uuid');
 const mongoose = require('mongoose');
 
+const Driver = require('./models/driver'); // Import driver model
+
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/lunaLink')
+mongoose.connect('mongodb://127.0.0.1:27017/lunaLink')
     .then(() => {
         console.log("Mongo Connection Open");
     })
