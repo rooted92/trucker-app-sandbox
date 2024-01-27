@@ -14,6 +14,11 @@
         <br>
         <label for="trailerStatus">Trailer Status:</label>
         <input type="text" name="trailerStatus" id="trailerStatus" placeholder="Enter trailer status">
+        <select name="trailerStatus" id="trailerStatus">
+            for(let trailerStatus of trailerStatuses){
+                <option value="<%= trailerStatus %>"><%= trailerStatus %></option>  
+            }
+        </select>
         <br>
         <label for="trailerLocation">Trailer Location:</label>
         <input type="text" name="trailerLocation" id="trailerLocation" placeholder="Enter trailer location">

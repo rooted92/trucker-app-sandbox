@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Driver = require('./models/driver.js');
 const Trailer = require('./models/trailer.js');
+const Yard = require('./models/yard.js');
 
 // Connect to MongoDB
 mongoose.connect('mongodb://127.0.0.1:27017/lunaLink')
@@ -17,7 +18,7 @@ let drivers = [
         name: 'Lewis Hamilton',
         email: 'lhamilton@gmail.com',
         truckId: '1012',
-        company: 'Express Transport' 
+        company: 'Express Transport'
     },
     {
         name: 'Max Verstappen',
@@ -52,12 +53,12 @@ let drivers = [
 ]
 
 Driver.insertMany(drivers)
-.then(res => {
-    console.log(res);
-})
-.catch(e => {
-    console.log(e);
-});
+    .then(res => {
+        console.log(res);
+    })
+    .catch(e => {
+        console.log(e);
+    });
 
 let trailers = [
     {
@@ -99,54 +100,69 @@ let trailers = [
 ]
 
 Trailer.insertMany(trailers)
-.then(res => {
-    console.log(res);
-})
-.catch(e => {
-    console.log(e);
-});
+    .then(res => {
+        console.log(res);
+    })
+    .catch(e => {
+        console.log(e);
+    });
 
 let yards = [
     {
-        yardName: 'Napa Yard',
-        yardLocation: 'Napa, CA',
-        yardCapacity: '40',
-        yardStatus: 'Active'
+        name: 'Napa Yard',
+        location: 'Napa, CA',
+        capacity: '40',
+        status: 'Active'
     },
     {
-        yardName: 'Modesto Yard',
-        yardLocation: 'Modesto, CA',
-        yardCapacity: '280',
-        yardStatus: 'Active'
+        name: 'Modesto Yard',
+        location: 'Modesto, CA',
+        capacity: '280',
+        status: 'Active'
     },
     {
-        yardName: 'Santa Rosa Skikos Yard',
-        yardLocation: 'Santa Rosa, CA',
-        yardCapacity: '80',
-        yardStatus: 'Active'
+        name: 'Santa Rosa Skikos Yard',
+        location: 'Santa Rosa, CA',
+        capacity: '80',
+        status: 'Active'
     },
     {
-        yardName: 'White City Yard',
-        yardLocation: 'White City, OR',
-        yardCapacity: '150',
-        yardStatus: 'Active'
+        name: 'White City Yard',
+        location: 'White City, OR',
+        capacity: '150',
+        status: 'Active'
     },
     {
-        yardName: 'Norcross Yard',
-        yardLocation: 'Norcross, GA',
-        yardCapacity: '50',
-        yardStatus: 'Active'
+        name: 'Norcross Yard',
+        location: 'Norcross, GA',
+        capacity: '50',
+        status: 'Active'
     },
     {
-        yardName: 'Atlanta Yard',
-        yardLocation: 'Atlanta, GA',
-        yardCapacity: '300',
-        yardStatus: 'Active'
+        name: 'Atlanta Yard',
+        location: 'Atlanta, GA',
+        capacity: '300',
+        status: 'Active'
     },
     {
-        yardName: 'Encore',
-        yardLocation: 'Fairfield, CA',
-        yardCapacity: '100',
-        yardStatus: 'Active'
+        name: 'Encore',
+        location: 'Fairfield, CA',
+        capacity: '100',
+        status: 'Active'
     }
-]
+];
+
+// Save yards to database
+
+const seedYards = async () => {
+    try {
+        const res = await Yard.insertMany(yards);
+        console.log(res);
+    }
+    catch (err) {
+        console.log('Error seeding yards to database!');
+        console.log(err);
+    }
+};
+
+seedYards();
