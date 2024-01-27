@@ -3,6 +3,17 @@ const app = express();
 const path = require('path');
 const methodOverride = require('method-override');
 const { v4: uuid } = require('uuid');
+const mongoose = require('mongoose');
+
+// Connect to MongoDB
+mongoose.connect('mongodb://localhost:27017/lunaLink')
+    .then(() => {
+        console.log("Mongo Connection Open");
+    })
+    .catch(err => {
+        console.log("Mongo Connection Error");
+        console.log(err);
+    })
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
