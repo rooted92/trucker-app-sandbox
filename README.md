@@ -1,12 +1,13 @@
 # Mini Project Documentation
 
-This mini project showcases basic CRUD functionality using Express.js, EJS, Bootstrap, Method Override, and UUID.
+This mini project showcases basic CRUD functionality using Express.js, MongoDB, Mongoose, EJS, Bootstrap, and Method Override.
 
 ## Installation
 
 To run the project, follow these steps:
 
 1. Clone or fork the repository.
+2. Install Node.js and MongoDB locally.
 2. Run `npm install` to generate the `node_modules` folder.
 3. Install Nodemon globally if you haven't already: `npm install -g nodemon`.
 4. Launch the server on localhost:3000 by running `node index.js` or if you installed Nodemon run `nodemon index.js`.
