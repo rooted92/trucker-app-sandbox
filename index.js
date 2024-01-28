@@ -151,7 +151,8 @@ app.delete('/trailer/:id', async (req, res) => {
 // YARD ROUTES***************************************************************************************
 
 // All Yard route
-app.get('/yards', (req, res) => {
+app.get('/yards', async (req, res) => {
+    const yards = await Yard.find({});
     res.render('yards/index.ejs', { yards });
 });
 

@@ -11,7 +11,7 @@
 
                 <% for(let yard of yards) { %>
                     <li>
-                        <a href="/yard/<%= yard.id %>" title="Click to view yard details"><%= yard.yardName %></a> - <%= yard.yardLocation %>
+                        <a href="/yard/<%= yard._id %>" title="Click to view yard details"><%= yard.name %></a> - <%= yard.location %>
                     </li>
                     <% } %>
 
