@@ -10,6 +10,7 @@ const Driver = require('./models/driver'); // Import driver model
 const Trailer = require('./models/trailer'); // Import trailer model
 const Yard = require('./models/yard'); // Import yard model
 
+// Arrays for dropdowns
 const trailerTypes = [
     'Dry Van',
     'Reefer',
@@ -21,9 +22,7 @@ const trailerTypes = [
     'Power Only',
     'Tanker'
 ];
-
 const trailerStatuses = ['Available', 'In Transit', 'Docked'];
-
 const yardStatuses = ['Open', 'Closed'];
 
 // Connect to MongoDB
@@ -34,7 +33,10 @@ mongoose.connect('mongodb://127.0.0.1:27017/lunaLink')
     .catch(err => {
         console.log("Mongo Connection Error");
         console.log(err);
-    })
+    });
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());

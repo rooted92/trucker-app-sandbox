@@ -1,6 +1,6 @@
 # Mini Project Documentation
 
-This Luna Link (formerly Fleet Finder - [frontend code](https://github.com/rooted92/frontendFF), [backend code](https://github.com/rooted92/backendFF)) mini project showcases basic CRUD functionality using Express.js, MongoDB, Mongoose, EJS, Bootstrap, and Method Override.
+This Luna Link (formerly Fleet Finder - [frontend](https://github.com/rooted92/frontendFF) | [backend](https://github.com/rooted92/backendFF)) mini project showcases basic CRUD functionality using Express.js, MongoDB, Mongoose, EJS, Bootstrap, and Method Override.
 
 ## Installation
 
