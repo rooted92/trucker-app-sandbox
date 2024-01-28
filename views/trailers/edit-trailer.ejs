@@ -5,7 +5,7 @@
     
 
     <h1>Edit Trailer</h1>
-    <form method="POST" action="/trailer/<%= trailerToUpdate.id %>?_method=PATCH">
+    <form method="POST" action="/trailer/<%= trailerToUpdate._id %>?_method=PATCH">
         <label for="trailerId">Trailer Number:</label>
         <input type="text" name="trailerId" id="trailerId" value="<%= trailerToUpdate.trailerId %>">
         <br>
@@ -13,7 +13,11 @@
         <input type="text" name="trailerType" id="trailerType" value="<%= trailerToUpdate.trailerType %>">
         <br>
         <label for="trailerStatus">Trailer Status:</label>
-        <input type="text" name="trailerStatus" id="trailerStatus" value="<%= trailerToUpdate.trailerStatus %>">
+        <select name="trailerStatus" id="trailerStatus">
+            <% for(let trailerStatus of trailerStatuses){ %>
+                <option value="<%= trailerStatus %>"><%= trailerStatus %></option>  
+            <% } %>
+        </select>
         <br>
         <label for="trailerLocation">Trailer Location:</label>
         <input type="text" name="trailerLocation" id="trailerLocation" value="<%= trailerToUpdate.trailerLocation %>">
@@ -21,7 +25,7 @@
         <input type="submit" value="Update Trailer">
     </form>
     <br>
-    <a href="/trailer/<%= trailerToUpdate.id %>">Back to Trailer Details</a>
+    <a href="/trailer/<%= trailerToUpdate._id %>">Back to Trailer Details</a>
 </div>
 
 <%- include('../partials/footer') %>

@@ -10,14 +10,17 @@
         <input type="text" name="trailerId" id="trailerId" placeholder="Enter trailer number">
         <br>
         <label for="trailerType">Trailer Type:</label>
-        <input type="text" name="trailerType" id="trailerType" placeholder="Enter trailer type">
+        <select name="trailerType" id="trailerType">
+            <% for(let trailerType of trailerTypes){ %>
+                <option value="<%= trailerType %>"><%= trailerType %></option>  
+            <%}%>
+        </select>
         <br>
         <label for="trailerStatus">Trailer Status:</label>
-        <input type="text" name="trailerStatus" id="trailerStatus" placeholder="Enter trailer status">
         <select name="trailerStatus" id="trailerStatus">
-            for(let trailerStatus of trailerStatuses){
+            <% for(let trailerStatus of trailerStatuses){ %>
                 <option value="<%= trailerStatus %>"><%= trailerStatus %></option>  
-            }
+            <%}%>
         </select>
         <br>
         <label for="trailerLocation">Trailer Location:</label>

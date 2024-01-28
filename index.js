@@ -100,52 +100,51 @@ app.delete('/driver/:id', async (req, res) => {
 // TRAILER ROUTES***************************************************************************************
 
 // All Trailers route
-app.get('/trailers', (req, res) => {
+app.get('/trailers', async (req, res) => {
+    const trailers = await Trailer.find({});
     res.render('trailers/index.ejs', { trailers });
 });
 
 // Add new trailer route
 app.get('/trailer/new', (req, res) => {
-    res.render('trailers/new-trailer.ejs');
+    res.render('trailers/new-trailer.ejs', { trailerTypes, trailerStatuses });
 });
 
 // Create new trailer route
 app.post('/trailers', (req, res) => {
-    const { trailerId, trailerType, trailerStatus, trailerLocation } = req.body;
-    trailers.push({ trailerId, trailerType, trailerStatus, trailerLocation, id: uuid() });
+    const newTrailer = new Trailer(req.body);
+    newTrailer.save();
     res.redirect('/trailers');
 });
 
 // Single Trailer route
-app.get('/trailer/:id', (req, res) => {
+app.get('/trailer/:id', async (req, res) => {
     const { id } = req.params;
-    const trailer = trailers.find(t => t.id === id);
+    const trailer = await Trailer.findById(id);
     res.render('trailers/trailer.ejs', { trailer });
 });
 
 // Edit trailer route
-app.get('/trailer/:id/edit', (req, res) => {
+app.get('/trailer/:id/edit', async (req, res) => {
     const { id } = req.params;
-    const trailerToUpdate = trailers.find(t => t.id === id);
-    res.render('trailers/edit-trailer.ejs', { trailerToUpdate });
+    const trailerToUpdate = await Trailer.findById(id);
+    res.render('trailers/edit-trailer.ejs', { trailerToUpdate, trailerStatuses });
 });
 
 // Update trailer route
-app.patch('/trailer/:id', (req, res) => {
+app.patch('/trailer/:id', async (req, res) => {
     const { id } = req.params;
-    const trailerToUpdate = req.body;
-    const trailer = trailers.find(t => t.id === id);
-    trailer.trailerId = trailerToUpdate.trailerId;
-    trailer.trailerType = trailerToUpdate.trailerType;
-    trailer.trailerStatus = trailerToUpdate.trailerStatus;
-    trailer.trailerLocation = trailerToUpdate.trailerLocation;
+    // What is runValidators? It is a mongoose option that runs the validators that are defined in the schema
+    // What is new? It is a mongoose option that returns the updated document rather than the original
+    // Dont need to save to variable, just awaiting the update
+    await Trailer.findByIdAndUpdate(id, req.body, { runValidators: true, new: true })
     res.redirect('/trailers');
 });
 
 // Delete trailer route
-app.delete('/trailer/:id', (req, res) => {
+app.delete('/trailer/:id', async (req, res) => {
     const { id } = req.params;
-    trailers = trailers.filter(t => t.id !== id);
+    await Trailer.findByIdAndDelete(id);
     res.redirect('/trailers');
 });
 
