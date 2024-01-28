@@ -54,47 +54,46 @@ app.get('/drivers', async (req, res) => {
 // Add new driver route
 // A more specific route should be placed above a more general route, so this route should be placed above the view single driver route (see below)
 app.get('/driver/new', (req, res) => {
-    console.log("New driver route hit");
-    res.render('drivers/new-driver.ejs', { trailerTypes, trailerStatuses });
+    res.render('drivers/new-driver.ejs');
 });
 
 // Create new driver route
-app.post('/drivers', (req, res) => {
-    const { name, email, truckId, company } = req.body;
-    drivers.push({ name, email, truckId, company, id: uuid() });
+app.post('/drivers', async (req, res) => {
+    // What is req.body? It is the data that is sent in the POST request from the form
+    const newDriver = new Driver(req.body);
+    // Save the new driver to the database
+    await newDriver.save();
+    // Why do we need async await here? Because we are saving to the database, which is an asynchronous operation
+    // Redirect to the drivers page
     res.redirect('/drivers');
 });
 
 // View single driver route
-app.get('/driver/:id', (req, res) => {
+app.get('/driver/:id', async (req, res) => {
     const { id } = req.params;
-    const driver = drivers.find(d => d.id === id);
+    const driver = await Driver.findById(id);
     res.render('drivers/driver.ejs', { driver });
 });
 
 // Edit driver route
-app.get('/driver/:id/edit', (req, res) => {
+app.get('/driver/:id/edit', async (req, res) => {
     const { id } = req.params;
-    const driverToUpdate = drivers.find(d => d.id === id);
+    const driverToUpdate = await Driver.findById(id);
     res.render('drivers/edit-driver.ejs', { driverToUpdate });
 });
 
 // Update driver route
-app.patch('/driver/:id', (req, res) => {
+app.patch('/driver/:id', async (req, res) => {
     const { id } = req.params;
-    const updatedDriver = req.body;
-    const driver = drivers.find(d => d.id === id);
-    driver.name = updatedDriver.name;
-    driver.email = updatedDriver.email;
-    driver.truckId = updatedDriver.truckId;
-    driver.company = updatedDriver.company;
-    res.redirect('/drivers');
+    const updateDriver = await Driver.findByIdAndUpdate(id, req.body, { runValidators: true, new: true });
+    res.redirect(`/driver/${updateDriver._id}`);
 });
 
 // Delete driver route
-app.delete('/driver/:id', (req, res) => {
+app.delete('/driver/:id', async (req, res) => {
     const { id } = req.params;
-    drivers = drivers.filter(d => d.id !== id);
+    // Await the deletion of the driver, then redirect to the drivers page
+    await Driver.findByIdAndDelete(id);
     res.redirect('/drivers');
 });
 
