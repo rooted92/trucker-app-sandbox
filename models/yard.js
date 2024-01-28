@@ -17,6 +17,7 @@ const yardSchema = new mongoose.Schema({
     },
     status: {
         type: String,
+        enum: ['Open', 'Closed'],
         required: true
     }
 });

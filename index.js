@@ -10,7 +10,7 @@ const Driver = require('./models/driver'); // Import driver model
 const Trailer = require('./models/trailer'); // Import trailer model
 const Yard = require('./models/yard'); // Import yard model
 
-let trailerTypes = [
+const trailerTypes = [
     'Dry Van',
     'Reefer',
     'Flatbed',
@@ -22,7 +22,9 @@ let trailerTypes = [
     'Tanker'
 ];
 
-let trailerStatuses = ['Available', 'In Transit', 'Docked'];
+const trailerStatuses = ['Available', 'In Transit', 'Docked'];
+
+const yardStatuses = ['Open', 'Closed'];
 
 // Connect to MongoDB
 mongoose.connect('mongodb://127.0.0.1:27017/lunaLink')
@@ -158,48 +160,43 @@ app.get('/yards', async (req, res) => {
 
 // Add new yard route
 app.get('/yard/new', (req, res) => {
-    res.render('yards/new-yard.ejs');
+    res.render('yards/new-yard.ejs', { yardStatuses });
 });
 
 // Create new yard route
-app.post('/yards', (req, res) => {
-    const { yardName, yardLocation, yardCapacity, yardStatus} = req.body;
-    yards.push({yardName, yardLocation, yardCapacity, yardStatus, id: uuid()});
+app.post('/yards', async (req, res) => {
+    const newYard = new Yard(req.body);
+    await newYard.save();
     res.redirect('/yards');
 });
 
 // Single Yard route
-app.get('/yard/:id', (req, res) => {
+app.get('/yard/:id', async (req, res) => {
     const { id } = req.params;
-    const yard = yards.find(y => y.id === id);
+    const yard = await Yard.findById(id);
     res.render('yards/yard.ejs', { yard });
 });
 
 // Edit Yard route
-app.get('/yard/:id/edit', (req, res) => {
+app.get('/yard/:id/edit', async (req, res) => {
     const { id } = req.params;
-    const yard = yards.find(y => y.id === id);
-    res.render('yards/edit-yard.ejs', { yard });
-})
+    const yard = await Yard.findById(id);
+    res.render('yards/edit-yard.ejs', { yard, yardStatuses });
+});
 
 // Update Yard route
-app.patch('/yard/:id', (req, res) => {
+app.patch('/yard/:id', async (req, res) => {
     const { id } = req.params;
-    const yardToUpdate = req.body;
-    const yard = yards.find(y => y.id === id);
-    yard.yardName = yardToUpdate.yardName;
-    yard.yardLocation = yardToUpdate.yardLocation;
-    yard.yardCapacity = yardToUpdate.yardCapacity;
-    yard.yardStatus = yardToUpdate.yardStatus;
+    await Yard.findByIdAndUpdate(id, req.body, { runValidators: true, new: true });
     res.redirect('/yards');
-})
+});
 
 // Delte Yard route
-app.delete('/yard/:id', (req, res) => {
+app.delete('/yard/:id', async (req, res) => {
     const { id } = req.params;
-    yards = yards.filter(y => y.id !== id);
+    await Yard.findByIdAndDelete(id);
     res.redirect('/yards');
-})
+});
 
 // Start server
 

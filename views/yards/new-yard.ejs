@@ -4,17 +4,21 @@
 <div class="container flex-grow-1">
     <h1>Add New Yard</h1>
     <form action="/yards" method="POST" >
-        <label for="yardName">Yard Name:</label>
-        <input type="text" name="yardName" id="yardName" placeholder="Enter yard name">
+        <label for="name">Yard Name:</label>
+        <input type="text" name="name" id="name" placeholder="Enter yard name">
         <br>
-        <label for="yardLocation">Yard Location:</label>
-        <input type="text" name="yardLocation" id="yardLocation" placeholder="Enter yard location">
+        <label for="location">Yard Location:</label>
+        <input type="text" name="location" id="location" placeholder="Enter yard location">
         <br>
-        <label for="yardCapacity">Yard Capacity:</label>
-        <input type="text" name="yardCapacity" id="yardCapacity" placeholder="Enter yard capacity">
+        <label for="capacity">Yard Capacity:</label>
+        <input type="text" name="capacity" id="capacity" placeholder="Enter yard capacity">
         <br>
-        <label for="yardStatus">Yard Status:</label>
-        <input type="text" name="yardStatus" id="yardStatus" placeholder="Enter yard status">
+        <label for="status">Yard Status:</label>
+        <select name="status" id="status">
+            <% for(let yardStatus of yardStatuses){ %>
+                <option value="<%= yardStatus %>"><%= yardStatus %></option>
+            <% } %>
+        </select>
         <br>
         <input type="submit" value="Add Yard">
     </form>
