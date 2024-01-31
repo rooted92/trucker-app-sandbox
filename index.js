@@ -4,11 +4,16 @@ const path = require('path');
 const methodOverride = require('method-override');
 const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
+const ExpressError = require('./utilities/ExpressError.js');
+const wrapAsync = require('./utilities/wrapAsync.js');
 
 // Models
-const Driver = require('./models/driver'); // Import driver model
-const Trailer = require('./models/trailer'); // Import trailer model
-const Yard = require('./models/yard'); // Import yard model
+const Driver = require('./models/driver.js'); // Import driver model
+const Trailer = require('./models/trailer.js'); // Import trailer model
+const Yard = require('./models/yard.js'); // Import yard model
+
+// Schemas
+const { driverSchema } = require('./schemas.js'); // Import driver schema
 
 // Arrays for dropdowns
 const trailerTypes = [
@@ -37,13 +42,26 @@ mongoose.connect('mongodb://127.0.0.1:27017/lunaLink')
 
 // Set up EJS
 app.engine('ejs', ejsMate);
-
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(methodOverride('_method'));
+
+// Function to check for errors, will use in routes. This function already uses try catch, so we don't need to use it in the routes. Saves us from having to write try catch in every route.
+
+const validateDriver = (req, res, next) => {
+    const { error } = driverSchema.validate(req.body);
+    if (error) {
+        // What is .details? It is a property of the error object that returns an array of objects with the error details
+        const msg = error.details.map(el => el.message).join(',');
+        throw new ExpressError(msg, 400);
+    } else {
+        next();
+    }
+};
+
 
 // Home route
 app.get('/', (req, res) => {
@@ -53,10 +71,10 @@ app.get('/', (req, res) => {
 // DRIVER ROUTES***************************************************************************************
 
 // All Drivers route
-app.get('/drivers', async (req, res) => {
+app.get('/drivers', wrapAsync(async (req, res) => {
     const drivers = await Driver.find({});
     res.render('drivers/index.ejs', { drivers });
-});
+}));
 
 // Add new driver route
 // A more specific route should be placed above a more general route, so this route should be placed above the view single driver route (see below)
@@ -65,7 +83,7 @@ app.get('/driver/new', (req, res) => {
 });
 
 // Create new driver route
-app.post('/drivers', async (req, res) => {
+app.post('/drivers', validateDriver, wrapAsync(async (req, res) => {
     // What is req.body? It is the data that is sent in the POST request from the form
     const newDriver = new Driver(req.body);
     // Save the new driver to the database
@@ -73,36 +91,36 @@ app.post('/drivers', async (req, res) => {
     // Why do we need async await here? Because we are saving to the database, which is an asynchronous operation
     // Redirect to the drivers page
     res.redirect('/drivers');
-});
+}));
 
 // View single driver route
-app.get('/driver/:id', async (req, res) => {
+app.get('/driver/:id', wrapAsync(async (req, res) => {
     const { id } = req.params;
     const driver = await Driver.findById(id);
     res.render('drivers/driver.ejs', { driver });
-});
+}));
 
 // Edit driver route
-app.get('/driver/:id/edit', async (req, res) => {
+app.get('/driver/:id/edit', wrapAsync(async (req, res) => {
     const { id } = req.params;
     const driverToUpdate = await Driver.findById(id);
     res.render('drivers/edit-driver.ejs', { driverToUpdate });
-});
+}));
 
 // Update driver route
-app.patch('/driver/:id', async (req, res) => {
+app.patch('/driver/:id', validateDriver, wrapAsync(async (req, res) => {
     const { id } = req.params;
     const updateDriver = await Driver.findByIdAndUpdate(id, req.body, { runValidators: true, new: true });
     res.redirect(`/driver/${updateDriver._id}`);
-});
+}));
 
 // Delete driver route
-app.delete('/driver/:id', async (req, res) => {
+app.delete('/driver/:id', wrapAsync(async (req, res) => {
     const { id } = req.params;
     // Await the deletion of the driver, then redirect to the drivers page
     await Driver.findByIdAndDelete(id);
     res.redirect('/drivers');
-});
+}));
 
 // TRAILER ROUTES***************************************************************************************
 
@@ -201,6 +219,14 @@ app.delete('/yard/:id', async (req, res) => {
     const { id } = req.params;
     await Yard.findByIdAndDelete(id);
     res.redirect('/yards');
+});
+
+// Catch errors
+
+app.use((err, req, res, next) => {
+    const { statusCode = 500 } = err;
+    if(!err.message) err.message = "Luna Link is experiencing technical difficulties.";
+    res.status(statusCode).render('error.ejs', { err });
 });
 
 // Start server

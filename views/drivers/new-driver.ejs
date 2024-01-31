@@ -1,21 +1,32 @@
 <% layout('layouts/boilerplate') %>
-<div class="container flex-grow-1">
-    <h1>Add New Driver</h1>
-    <form action="/drivers" method="POST">
-        <label for="name">Name:</label>
-        <input type="text" name="name" id="name" placeholder="Enter driver name">
-        <br>
-        <label for="email">Email:</label>
-        <input type="text" name="email" id="email" placeholder="Enter email address">
-        <br>
-        <label for="truckId">Truck #:</label>
-        <input type="text" name="truckId" id="truckId" placeholder="Enter truck #">
-        <br>
-        <label for="company">Company:</label>
-        <input type="text" name="company" id="company" placeholder="Enter company name">
-        <br>
-        <input type="submit" value="Add Driver">
-    </form>
-    <br>
-    <a href="/drivers">Back to Index</a>
-</div>
+    <div class="container flex-grow-1">
+        <div class="row d-flex justify-content-center mb-5">
+            <h1 class="text-center">Add New Driver</h1>
+            <form action="/drivers" method="POST" class="col-6" novalidate>
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <label class="form-label" for="name">Name:</label>
+                        <input class="form-control" type="text" name="name" id="name" placeholder="Enter driver name">
+                    </div>
+                    <div class="col-12 mb-3">
+                        <label class="form-label" for="email">Email:</label>
+                        <input class="form-control" type="text" name="email" id="email"
+                            placeholder="Enter email address">
+                    </div>
+                    <div class="col-12 mb-3">
+                        <label class="form-label" for="truckId">Truck #:</label>
+                        <input class="form-control" type="text" name="truckId" id="truckId" placeholder="Enter truck #">
+                    </div>
+                    <div class="col-12 mb-3">
+                        <label class="form-label" for="company">Company:</label>
+                        <input class="form-control" type="text" name="company" id="company"
+                            placeholder="Enter company name">
+                    </div>
+                    <div class="col-12 mt-3">
+                        <button class="btn btn-primary" type="submit">Add Driver</button>
+                        <a class="btn btn-primary align-self-center" href="/drivers" role="button">Back to Drivers</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
