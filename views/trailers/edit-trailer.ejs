@@ -1,9 +1,5 @@
-<%- include('../partials/head') %>
-<%- include('../partials/navbar') %>
-
+<% layout('layouts/boilerplate') %>
 <div class="container flex-grow-1">
-    
-
     <h1>Edit Trailer</h1>
     <form method="POST" action="/trailer/<%= trailerToUpdate._id %>?_method=PATCH">
         <label for="trailerId">Trailer Number:</label>
@@ -27,5 +23,3 @@
     <br>
     <a href="/trailer/<%= trailerToUpdate._id %>">Back to Trailer Details</a>
 </div>
-
-<%- include('../partials/footer') %>

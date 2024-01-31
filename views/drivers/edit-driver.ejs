@@ -1,9 +1,5 @@
-<%- include('../partials/head') %>
-<%- include('../partials/navbar') %>
-
+<% layout('layouts/boilerplate') %>
 <div class="container flex-grow-1">
-    
-
     <h1>Edit Driver</h1>
     <form method="POST" action="/driver/<%= driverToUpdate._id %>?_method=PATCH">
         <label for="name">Name:</label>
@@ -23,5 +19,3 @@
     <br>
     <a href="/driver/<%= driverToUpdate._id %>">Back to Driver Details</a>
 </div>
-
-<%- include('../partials/footer') %>

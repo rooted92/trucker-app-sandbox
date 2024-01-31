@@ -1,22 +1,16 @@
-<%- include('../partials/head') %>
-<%- include('../partials/navbar') %>
+<% layout('layouts/boilerplate') %>
+<div class="container flex-grow-1">
+    <h1>Trailer Details</h1>
+    <p><b>Trailer #:</b> <%= trailer.trailerId %></p>
+    <p><b>Trailer Type:</b> <%= trailer.trailerType %></p>
+    <p><b>Trailer Status:</b> <%= trailer.trailerStatus %></p>
+    <p><b>Trailer Location:</b> <%= trailer.trailerLocation %></p>
 
-    <div class="container flex-grow-1">
-
-        <h1>Trailer Details</h1>
-        <p><b>Trailer #:</b> <%= trailer.trailerId %></p>
-        <p><b>Trailer Type:</b> <%= trailer.trailerType %></p>
-        <p><b>Trailer Status:</b> <%= trailer.trailerStatus %></p>
-        <p><b>Trailer Location:</b> <%= trailer.trailerLocation %></p>
-
-        <a href="/trailers">Back to Index</a>
-        <br>
-        <a href="/trailer/<%= trailer._id %>/edit">Edit Trailer</a>
-        <br>
-        <form class="mt-3" method="POST" action="/trailer/<%= trailer._id %>?_method=DELETE">
-            <input class="bg-danger text-light border border-0 rounded p-1 px-2" type="submit" value="Delete Trailer">
-        </form>
-
-    </div>
-
-<%- include('../partials/footer') %>
+    <a href="/trailers">Back to Index</a>
+    <br>
+    <a href="/trailer/<%= trailer._id %>/edit">Edit Trailer</a>
+    <br>
+    <form class="mt-3" method="POST" action="/trailer/<%= trailer._id %>?_method=DELETE">
+        <input class="bg-danger text-light border border-0 rounded p-1 px-2" type="submit" value="Delete Trailer">
+    </form>
+</div>

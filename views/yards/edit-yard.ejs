@@ -1,6 +1,4 @@
-<%- include('../partials/head') %>
-<%- include('../partials/navbar') %>
-
+<% layout('layouts/boilerplate') %>
 <div class="container flex-grow-1">
     <h1>Edit Yard</h1>
     <form action="/yard/<%= yard._id %>?_method=PATCH" method="POST">

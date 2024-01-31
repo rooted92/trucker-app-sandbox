@@ -1,13 +1,13 @@
-<%- include('../partials/head') %>
-<%- include('../partials/navbar') %>
-
+<% layout('layouts/boilerplate') %>
     <div class="container flex-grow-1">
         <div class="container">
             <h1>Trailers</h1>
             <ul>
                 <% for(let trailer of trailers) { %>
                     <li>
-                        <a href="/trailer/<%= trailer.id %>" title="Click to view trailer details"><%= trailer.trailerId %></a> - <%= trailer.trailerStatus %>
+                        <a href="/trailer/<%= trailer.id %>" title="Click to view trailer details">
+                            <%= trailer.trailerId %>
+                        </a> - <%= trailer.trailerStatus %>
                     </li>
                     <% } %>
             </ul>
@@ -15,5 +15,3 @@
         </div>
 
     </div>
-
-<%- include('../partials/footer') %>

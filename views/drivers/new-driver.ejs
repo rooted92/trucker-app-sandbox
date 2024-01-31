@@ -1,9 +1,5 @@
-<%- include('../partials/head') %>
-<%- include('../partials/navbar') %>
-
+<% layout('layouts/boilerplate') %>
 <div class="container flex-grow-1">
-    
-
     <h1>Add New Driver</h1>
     <form action="/drivers" method="POST">
         <label for="name">Name:</label>
@@ -23,5 +19,3 @@
     <br>
     <a href="/drivers">Back to Index</a>
 </div>
-
-<%- include('../partials/footer') %>

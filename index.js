@@ -2,8 +2,8 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const methodOverride = require('method-override');
-const { v4: uuid } = require('uuid');
 const mongoose = require('mongoose');
+const ejsMate = require('ejs-mate');
 
 // Models
 const Driver = require('./models/driver'); // Import driver model
@@ -34,6 +34,9 @@ mongoose.connect('mongodb://127.0.0.1:27017/lunaLink')
         console.log("Mongo Connection Error");
         console.log(err);
     });
+
+// Set up EJS
+app.engine('ejs', ejsMate);
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));

@@ -1,6 +1,4 @@
-<%- include('../partials/head') %>
-<%- include('../partials/navbar') %>
-
+<% layout('layouts/boilerplate') %>
 <div class="container flex-grow-1">
     <h1>Add New Yard</h1>
     <form action="/yards" method="POST" >
@@ -26,5 +24,3 @@
     <br>
     <a href="/yards">Back to Index</a>
 </div>
-
-<%- include('../partials/footer') %>
