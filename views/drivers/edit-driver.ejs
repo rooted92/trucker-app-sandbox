@@ -1,21 +1,58 @@
 <% layout('layouts/boilerplate') %>
 <div class="container flex-grow-1">
-    <h1>Edit Driver</h1>
-    <form method="POST" action="/driver/<%= driverToUpdate._id %>?_method=PATCH">
-        <label for="name">Name:</label>
-        <input type="text" name="name" id="name" value="<%= driverToUpdate.name %>">
-        <br>
-        <label for="truckId">Truck #:</label>
-        <input type="text" name="truckId" id="truckId" value="<%= driverToUpdate.truckId %>">
-        <br>
-        <label for="company">Company:</label>
-        <input type="text" name="company" id="company" value="<%= driverToUpdate.company %>">
-        <br>
-        <label for="email">Email:</label>
-        <input type="text" name="email" id="email" value="<%= driverToUpdate.email %>">
-        <br>
-        <input type="submit" value="Update Driver">
-    </form>
-    <br>
-    <a href="/driver/<%= driverToUpdate._id %>">Back to Driver Details</a>
+    <div class="row d-flex justify-content-center mb-5">
+        <h1 class="text-center">Edit Driver</h1>
+        <form action="/driver/<%= driverToUpdate._id %>?_method=PATCH" method="POST" class="col-6 needs-validation" novalidate>
+            <div class="row">
+                <div class="col-12 mb-3">
+                    <label class="form-label" for="name">Name:</label>
+                    <input class="form-control" type="text" name="name" id="name" placeholder="Enter driver name" value="<%= driverToUpdate.name %>"
+                        required>
+                    <div class="invalid-feedback">
+                        Field can not be empty!
+                    </div>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="col-12 mb-3">
+                    <label class="form-label" for="email">Email:</label>
+                    <input class="form-control" type="text" name="email" id="email"
+                        placeholder="Enter email address" value="<%= driverToUpdate.email %>" required>
+                    <div class="invalid-feedback">
+                        Field can not be empty!
+                    </div>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="col-12 mb-3">
+                    <label class="form-label" for="truckId">Truck #:</label>
+                    <input class="form-control" type="text" name="truckId" id="truckId" placeholder="Enter truck #" value="<%= driverToUpdate.truckId %>"
+                        required>
+                    <div class="invalid-feedback">
+                        Field can not be empty!
+                    </div>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="col-12 mb-3">
+                    <label class="form-label" for="company">Company:</label>
+                    <input class="form-control" type="text" name="company" id="company"
+                        placeholder="Enter company name" value="<%= driverToUpdate.company %>" required>
+                    <div class="invalid-feedback">
+                        Field can not be empty!
+                    </div>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="col-12 mt-3">
+                    <button class="btn btn-primary" type="submit">Update Driver</button>
+                    <a class="btn btn-secondary align-self-center" href="/driver/<%= driverToUpdate._id %>" role="button">Back to Driver Details</a>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>

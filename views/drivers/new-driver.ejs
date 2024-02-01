@@ -2,25 +2,51 @@
     <div class="container flex-grow-1">
         <div class="row d-flex justify-content-center mb-5">
             <h1 class="text-center">Add New Driver</h1>
-            <form action="/drivers" method="POST" class="col-6" novalidate>
+            <form action="/drivers" method="POST" class="col-6 needs-validation" novalidate>
                 <div class="row">
                     <div class="col-12 mb-3">
                         <label class="form-label" for="name">Name:</label>
-                        <input class="form-control" type="text" name="name" id="name" placeholder="Enter driver name">
+                        <input class="form-control" type="text" name="name" id="name" placeholder="Enter driver name"
+                            required>
+                        <div class="invalid-feedback">
+                            Field can not be empty!
+                        </div>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
                     </div>
                     <div class="col-12 mb-3">
                         <label class="form-label" for="email">Email:</label>
                         <input class="form-control" type="text" name="email" id="email"
-                            placeholder="Enter email address">
+                            placeholder="Enter email address" required>
+                        <div class="invalid-feedback">
+                            Field can not be empty!
+                        </div>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
                     </div>
                     <div class="col-12 mb-3">
                         <label class="form-label" for="truckId">Truck #:</label>
-                        <input class="form-control" type="text" name="truckId" id="truckId" placeholder="Enter truck #">
+                        <input class="form-control" type="text" name="truckId" id="truckId" placeholder="Enter truck #"
+                            required>
+                        <div class="invalid-feedback">
+                            Field can not be empty!
+                        </div>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
                     </div>
                     <div class="col-12 mb-3">
                         <label class="form-label" for="company">Company:</label>
                         <input class="form-control" type="text" name="company" id="company"
-                            placeholder="Enter company name">
+                            placeholder="Enter company name" required>
+                        <div class="invalid-feedback">
+                            Field can not be empty!
+                        </div>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
                     </div>
                     <div class="col-12 mt-3">
                         <button class="btn btn-primary" type="submit">Add Driver</button>

@@ -223,10 +223,14 @@ app.delete('/yard/:id', async (req, res) => {
 
 // Catch errors
 
+app.all('*', (req, res, next) => {
+    next(new ExpressError('Page Not Found', 404));
+});
+
 app.use((err, req, res, next) => {
     const { statusCode = 500 } = err;
     if(!err.message) err.message = "Luna Link is experiencing technical difficulties.";
-    res.status(statusCode).render('error.ejs', { err });
+    res.status(statusCode).render('error.ejs', { err, statusCode });
 });
 
 // Start server
