@@ -1,31 +1,68 @@
 <% layout('layouts/boilerplate') %>
-<div class="container flex-grow-1">
-    
-
-    <h1>Add New Trailer</h1>
-    <form action="/trailers" method="POST">
-        <label for="trailerId">Trailer Number:</label>
-        <input type="text" name="trailerId" id="trailerId" placeholder="Enter trailer number">
-        <br>
-        <label for="trailerType">Trailer Type:</label>
-        <select name="trailerType" id="trailerType">
-            <% for(let trailerType of trailerTypes){ %>
-                <option value="<%= trailerType %>"><%= trailerType %></option>  
-            <%}%>
-        </select>
-        <br>
-        <label for="trailerStatus">Trailer Status:</label>
-        <select name="trailerStatus" id="trailerStatus">
-            <% for(let trailerStatus of trailerStatuses){ %>
-                <option value="<%= trailerStatus %>"><%= trailerStatus %></option>  
-            <%}%>
-        </select>
-        <br>
-        <label for="trailerLocation">Trailer Location:</label>
-        <input type="text" name="trailerLocation" id="trailerLocation" placeholder="Enter trailer location">
-        <br>
-        <input type="submit" value="Add Trailer">
-    </form>
-    <br>
-    <a href="/trailers">Back to Index</a>
-</div>
+    <div class="container flex-grow-1">
+        <div class="row d-flex justify-content-center mb-5">
+            <h1 class="text-center">Add New Trailer</h1>
+            <form class="col-6 needs-validation" action="/trailers" method="POST" novalidate>
+                <div class="col-12 mb-3">
+                    <label class="form-label" for="trailerId">Trailer Number:</label>
+                    <input class="form-control" type="text" name="trailerId" id="trailerId"
+                        placeholder="Enter trailer number" required>
+                    <div class="invalid-feedback">
+                        Field can not be empty!
+                    </div>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="col-12 mb-3">
+                    <label class="form-label" for="trailerType">Trailer Type:</label>
+                    <select class="form-control" name="trailerType" id="trailerType" required>
+                        <option value="">Select type...</option>
+                        <% for(let trailerType of trailerTypes){ %>
+                            <option value="<%= trailerType %>">
+                                <%= trailerType %>
+                            </option>
+                        <% } %>
+                    </select>
+                    <div class="invalid-feedback">
+                        Field can not be empty!
+                    </div>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="col-12 mb-3">
+                    <label class="form-label" for="trailerStatus">Trailer Status:</label>
+                    <select class="form-control" name="trailerStatus" id="trailerStatus" required>
+                        <option value="">Select status...</option>
+                        <% for(let trailerStatus of trailerStatuses){ %>
+                            <option value="<%= trailerStatus %>">
+                                <%= trailerStatus %>
+                            </option>
+                            <% } %>
+                    </select>
+                    <div class="invalid-feedback">
+                        Field can not be empty!
+                    </div>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="col-12 mb-3">
+                    <label class="form-label" for="trailerLocation">Trailer Location:</label>
+                    <input class="form-control" type="text" name="trailerLocation" id="trailerLocation"
+                        placeholder="Enter trailer location" required>
+                    <div class="invalid-feedback">
+                        Field can not be empty!
+                    </div>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="col-12 mt-3">
+                    <button class="btn btn-primary" type="submit">Add Trailer</button>
+                    <a class="btn btn-secondary" href="/trailers" role="button">Back to Trailers</a>
+                </div>
+            </form>
+        </div>
+    </div>

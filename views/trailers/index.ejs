@@ -1,17 +1,25 @@
 <% layout('layouts/boilerplate') %>
     <div class="container flex-grow-1">
         <div class="container">
-            <h1>Trailers</h1>
-            <ul>
-                <% for(let trailer of trailers) { %>
-                    <li>
-                        <a href="/trailer/<%= trailer.id %>" title="Click to view trailer details">
-                            <%= trailer.trailerId %>
-                        </a> - <%= trailer.trailerStatus %>
-                    </li>
-                    <% } %>
-            </ul>
-            <a href="/trailer/new">Add New Trailer</a>
+            <div class="row">
+                <div class="col-12 col-md-6 col-lg-3">
+                    <h1>Trailers</h1>
+                    <ul class="list-group list-group-flush">
+                        <% for(let trailer of trailers) { %>
+                            <li class="list-group-item bg-dark text-light">
+                                <div class="d-flex justify-content-between">
+                                    <a class="fw-bold link-offset-2-hover link-offset-3" href="/trailer/<%= trailer.id %>"
+                                        title="Click to view trailer details">
+                                        <%= trailer.trailerId %></a>
+                                    <p><%= trailer.trailerStatus %></p>
+                                </div>
+                            </li>
+                            <% } %>
+                    </ul>
+                    <a class="btn btn-primary my-5" href="/trailer/new">Add New Trailer</a>
+                </div>
+            </div>
+
         </div>
 
     </div>

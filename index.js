@@ -13,7 +13,7 @@ const Trailer = require('./models/trailer.js'); // Import trailer model
 const Yard = require('./models/yard.js'); // Import yard model
 
 // Schemas
-const { driverSchema } = require('./schemas.js'); // Import driver schema
+const { driverSchema, trailerSchema, yardSchema } = require('./schemas.js'); // Import schemas
 
 // Arrays for dropdowns
 const trailerTypes = [
@@ -49,19 +49,18 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(methodOverride('_method'));
 
-// Function to check for errors, will use in routes. This function already uses try catch, so we don't need to use it in the routes. Saves us from having to write try catch in every route.
-
-const validateDriver = (req, res, next) => {
-    const { error } = driverSchema.validate(req.body);
-    if (error) {
-        // What is .details? It is a property of the error object that returns an array of objects with the error details
-        const msg = error.details.map(el => el.message).join(',');
-        throw new ExpressError(msg, 400);
-    } else {
-        next();
+// Function to validate schemas using Joi
+const validateSchema = (schema) => {
+    return (req, res, next) => {
+        const { error } = schema.validate(req.body);
+        if (error) {
+            const msg = error.details.map(el => el.message).join(',');
+            throw new ExpressError(msg, 400);
+        } else {
+            next();
+        }
     }
 };
-
 
 // Home route
 app.get('/', (req, res) => {
@@ -83,7 +82,7 @@ app.get('/driver/new', (req, res) => {
 });
 
 // Create new driver route
-app.post('/drivers', validateDriver, wrapAsync(async (req, res) => {
+app.post('/drivers', validateSchema(driverSchema), wrapAsync(async (req, res) => {
     // What is req.body? It is the data that is sent in the POST request from the form
     const newDriver = new Driver(req.body);
     // Save the new driver to the database
@@ -108,7 +107,7 @@ app.get('/driver/:id/edit', wrapAsync(async (req, res) => {
 }));
 
 // Update driver route
-app.patch('/driver/:id', validateDriver, wrapAsync(async (req, res) => {
+app.patch('/driver/:id', validateSchema(driverSchema), wrapAsync(async (req, res) => {
     const { id } = req.params;
     const updateDriver = await Driver.findByIdAndUpdate(id, req.body, { runValidators: true, new: true });
     res.redirect(`/driver/${updateDriver._id}`);
@@ -125,10 +124,10 @@ app.delete('/driver/:id', wrapAsync(async (req, res) => {
 // TRAILER ROUTES***************************************************************************************
 
 // All Trailers route
-app.get('/trailers', async (req, res) => {
+app.get('/trailers', wrapAsync(async (req, res) => {
     const trailers = await Trailer.find({});
     res.render('trailers/index.ejs', { trailers });
-});
+}));
 
 // Add new trailer route
 app.get('/trailer/new', (req, res) => {
@@ -136,50 +135,51 @@ app.get('/trailer/new', (req, res) => {
 });
 
 // Create new trailer route
-app.post('/trailers', (req, res) => {
+app.post('/trailers', validateSchema(trailerSchema), (req, res) => {
     const newTrailer = new Trailer(req.body);
     newTrailer.save();
     res.redirect('/trailers');
 });
 
 // Single Trailer route
-app.get('/trailer/:id', async (req, res) => {
+app.get('/trailer/:id', wrapAsync(async (req, res) => {
     const { id } = req.params;
     const trailer = await Trailer.findById(id);
     res.render('trailers/trailer.ejs', { trailer });
-});
+}));
 
 // Edit trailer route
-app.get('/trailer/:id/edit', async (req, res) => {
+app.get('/trailer/:id/edit', wrapAsync(async (req, res) => {
     const { id } = req.params;
     const trailerToUpdate = await Trailer.findById(id);
-    res.render('trailers/edit-trailer.ejs', { trailerToUpdate, trailerStatuses });
-});
+    console.log(trailerToUpdate);
+    res.render('trailers/edit-trailer.ejs', { trailerToUpdate, trailerStatuses, trailerTypes });
+}));
 
 // Update trailer route
-app.patch('/trailer/:id', async (req, res) => {
+app.patch('/trailer/:id', validateSchema(trailerSchema), wrapAsync(async (req, res) => {
     const { id } = req.params;
     // What is runValidators? It is a mongoose option that runs the validators that are defined in the schema
     // What is new? It is a mongoose option that returns the updated document rather than the original
     // Dont need to save to variable, just awaiting the update
     await Trailer.findByIdAndUpdate(id, req.body, { runValidators: true, new: true })
     res.redirect('/trailers');
-});
+}));
 
 // Delete trailer route
-app.delete('/trailer/:id', async (req, res) => {
+app.delete('/trailer/:id', wrapAsync(async (req, res) => {
     const { id } = req.params;
     await Trailer.findByIdAndDelete(id);
     res.redirect('/trailers');
-});
+}));
 
 // YARD ROUTES***************************************************************************************
 
 // All Yard route
-app.get('/yards', async (req, res) => {
+app.get('/yards', wrapAsync(async (req, res) => {
     const yards = await Yard.find({});
     res.render('yards/index.ejs', { yards });
-});
+}));
 
 // Add new yard route
 app.get('/yard/new', (req, res) => {
@@ -187,39 +187,39 @@ app.get('/yard/new', (req, res) => {
 });
 
 // Create new yard route
-app.post('/yards', async (req, res) => {
+app.post('/yards', validateSchema(yardSchema), wrapAsync(async (req, res) => {
     const newYard = new Yard(req.body);
     await newYard.save();
     res.redirect('/yards');
-});
+}));
 
 // Single Yard route
-app.get('/yard/:id', async (req, res) => {
+app.get('/yard/:id', wrapAsync(async (req, res) => {
     const { id } = req.params;
     const yard = await Yard.findById(id);
     res.render('yards/yard.ejs', { yard });
-});
+}));
 
 // Edit Yard route
-app.get('/yard/:id/edit', async (req, res) => {
+app.get('/yard/:id/edit', wrapAsync(async (req, res) => {
     const { id } = req.params;
     const yard = await Yard.findById(id);
     res.render('yards/edit-yard.ejs', { yard, yardStatuses });
-});
+}));
 
 // Update Yard route
-app.patch('/yard/:id', async (req, res) => {
+app.patch('/yard/:id', validateSchema(yardSchema), wrapAsync(async (req, res) => {
     const { id } = req.params;
     await Yard.findByIdAndUpdate(id, req.body, { runValidators: true, new: true });
     res.redirect('/yards');
-});
+}));
 
 // Delte Yard route
-app.delete('/yard/:id', async (req, res) => {
+app.delete('/yard/:id', wrapAsync(async (req, res) => {
     const { id } = req.params;
     await Yard.findByIdAndDelete(id);
     res.redirect('/yards');
-});
+}));
 
 // Catch errors
 
@@ -229,7 +229,7 @@ app.all('*', (req, res, next) => {
 
 app.use((err, req, res, next) => {
     const { statusCode = 500 } = err;
-    if(!err.message) err.message = "Luna Link is experiencing technical difficulties.";
+    if (!err.message) err.message = "Luna Link is experiencing technical difficulties.";
     res.status(statusCode).render('error.ejs', { err, statusCode });
 });
 

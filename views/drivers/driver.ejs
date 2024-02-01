@@ -1,14 +1,14 @@
 <% layout('layouts/boilerplate') %>
 <div class="container flex-grow-1">
     <h1>Driver Details</h1>
-    <h2><%= driver.name %></h2>
+    <h2 class="text-success"><%= driver.name %></h2>
     <p><b>Contact:</b> <%= driver.email %></p>
     <p><b>Truck #:</b> <%= driver.truckId %></p>
     <p><b>Drives for:</b> <%= driver.company %></p>
 
     <div class="d-flex justify-content-start">
-        <a class="me-3" href="/drivers">Back to Index</a>
-        <a href="/driver/<%= driver._id %>/edit" >Edit Driver</a>
+        <a class="me-3 link-offset-2-hover link-offset-3" href="/drivers">Back to Index</a>
+        <a class="link-offset-2-hover link-offset-3" href="/driver/<%= driver._id %>/edit" >Edit Driver</a>
     </div>
     <form class="my-3" action="/driver/<%= driver._id %>?_method=DELETE" method="POST">
         <input class="bg-danger text-light border border-0 rounded p-1 px-2" type="submit" value="Delete Driver">
