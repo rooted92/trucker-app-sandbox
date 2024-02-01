@@ -1,20 +1,26 @@
 <% layout('layouts/boilerplate') %>
     <div class="container flex-grow-1">
-
         <div class="container">
-
-            <h1>Yards</h1>
-
-            <ul>
-
-                <% for(let yard of yards) { %>
-                    <li>
-                        <a href="/yard/<%= yard._id %>" title="Click to view yard details"><%= yard.name %></a> - <%= yard.location %>
-                    </li>
-                    <% } %>
-
-            </ul>
-            <a href="/yard/new">Add New Yard</a>
+            <div class="row">
+                <h1>Yards</h1>
+                <div class="col-12 col-md-6 col-lg-3">
+                    <ul class="list-group list-group-flush">
+                        <% for(let yard of yards) { %>
+                            <li class="list-group-item bg-dark text-light">
+                                <div class="ms-2 me-auto">
+                                    <a class="fw-bold link-offset-2-hover link-offset-3" href="/yard/<%= yard._id %>"
+                                        title="Click to view yard details">
+                                        <%= yard.name %>
+                                    </a>
+                                    <p>
+                                        <%= yard.location %>
+                                    </p>
+                                </div>
+                            </li>
+                            <% } %>
+                    </ul>
+                    <a class="btn btn-primary mt-3 mb-5" href="/yard/new">Add New Yard</a>
+                </div>
+            </div>
         </div>
-
     </div>

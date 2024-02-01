@@ -1,8 +1,8 @@
-<% layout('layouts/boilerplate') %>
+<% layout('layouts/boilerplate') %> 
     <div class="container flex-grow-1">
         <div class="row d-flex justify-content-center mb-5">
             <h1 class="text-center">Edit Trailer</h1>
-            <form class="col-6 needs-validation" method="POST"
+            <form class="col-12 col-md-6 needs-validation" method="POST"
                 action="/trailer/<%= trailerToUpdate._id %>?_method=PATCH" novalidate>
                 <div class="row">
                     <div class="col-12 mb-3">

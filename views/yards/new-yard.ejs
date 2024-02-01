@@ -1,26 +1,62 @@
 <% layout('layouts/boilerplate') %>
-<div class="container flex-grow-1">
-    <h1>Add New Yard</h1>
-    <form action="/yards" method="POST" >
-        <label for="name">Yard Name:</label>
-        <input type="text" name="name" id="name" placeholder="Enter yard name">
-        <br>
-        <label for="location">Yard Location:</label>
-        <input type="text" name="location" id="location" placeholder="Enter yard location">
-        <br>
-        <label for="capacity">Yard Capacity:</label>
-        <input type="text" name="capacity" id="capacity" placeholder="Enter yard capacity">
-        <br>
-        <label for="status">Yard Status:</label>
-        <select name="status" id="status">
-            <% for(let yardStatus of yardStatuses){ %>
-                <option value="<%= yardStatus %>"><%= yardStatus %></option>
-            <% } %>
-        </select>
-        <br>
-        <input type="submit" value="Add Yard">
-    </form>
-
-    <br>
-    <a href="/yards">Back to Index</a>
-</div>
+    <div class="container flex-grow-1">
+        <div class="row d-flex justify-content-center mb-5">
+            <h1 class="text-center">Add New Yard</h1>
+            <form class="col-12 col-md-6 needs-validation" action="/yards" method="POST" novalidate>
+                <div class="col-12 mb-3">
+                    <label class="form-label" for="name">Yard Name:</label>
+                    <input class="form-control" type="text" name="name" id="name" placeholder="Enter yard name"
+                        required>
+                    <div class="invalid-feedback">
+                        Field can not be empty!
+                    </div>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="col-12 mb-3">
+                    <label class="form-label" for="location">Yard Location:</label>
+                    <input class="form-control" type="text" name="location" id="location"
+                        placeholder="Enter yard location" required>
+                    <div class="invalid-feedback">
+                        Field can not be empty!
+                    </div>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="col-12 mb-3">
+                    <label class="form-label" for="capacity">Yard Capacity:</label>
+                    <input class="form-control" type="text" name="capacity" id="capacity"
+                        placeholder="Enter yard capacity" required>
+                    <div class="invalid-feedback">
+                        Field can not be empty!
+                    </div>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="col-12 mb-3">
+                    <label class="form-label" for="status">Yard Status:</label>
+                    <select class="form-control" name="status" id="status" required>
+                        <option value="">Select status...</option>
+                        <% for(let yardStatus of yardStatuses){ %>
+                            <option value="<%= yardStatus %>">
+                                <%= yardStatus %>
+                            </option>
+                            <% } %>
+                    </select>
+                    <div class="invalid-feedback">
+                        Field can not be empty!
+                    </div>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="col-12 mt-3">
+                    <button class="btn btn-primary" type="submit">Add Yard</button>
+                    <a class="btn btn-secondary" href="/yards" role="button">Back to Yards</a>
+                </div>
+            </form>
+        </div>
+    </div>

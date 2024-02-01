@@ -1,31 +1,62 @@
 <% layout('layouts/boilerplate') %>
-<div class="container flex-grow-1">
-    <h1>Edit Yard</h1>
-    <form action="/yard/<%= yard._id %>?_method=PATCH" method="POST">
-        <div class="form-group">
-            <label for="name">Yard Name</label>
-            <input type="text" class="form-control" id="name" name="name" value="<%= yard.name %>">
+    <div class="container flex-grow-1">
+        <div class="row d-flex justify-content-center mb-5">
+            <h1 class="text-center">Edit Yard</h1>
+            <form class="col-12 col-md-6 needs-validation" action="/yard/<%= yard._id %>?_method=PATCH" method="POST"
+                novalidate>
+                <div class="form-group mb-3">
+                    <label class="form-label" for="name">Yard Name</label>
+                    <input class="form-control" type="text" class="form-control" id="name" name="name"
+                        value="<%= yard.name %>" required>
+                    <div class="invalid-feedback">
+                        Field can not be empty!
+                    </div>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <label class="form-label" for="location">Yard Location</label>
+                    <input class="form-control" type="text" class="form-control" id="location" name="location"
+                        value="<%= yard.location %>" required>
+                    <div class="invalid-feedback">
+                        Field can not be empty!
+                    </div>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <label class="form-label" for="capacity">Yard Capacity</label>
+                    <input class="form-control" type="text" class="form-control" id="capacity" name="capacity"
+                        value="<%= yard.capacity %>" required>
+                    <div class="invalid-feedback">
+                        Field can not be empty!
+                    </div>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <label class="form-label" for="status">Yard Status</label>
+                    <select class="form-control" name="status" id="status" required>
+                        <option value="">Select status...</option>
+                        <% for(let yardStatus of yardStatuses){ %>
+                            <option value="<%= yardStatus %>" <% if(yardStatus===yard.status){ %> selected <% } %>><%= yardStatus %>
+                            </option>
+                            <% } %>
+                    </select>
+                    <div class="invalid-feedback">
+                        Field can not be empty!
+                    </div>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="col-12 mt-3">
+                    <button type="submit" class="btn btn-primary">Update Yard</button>
+                    <a class="btn btn-secondary" href="/yard/<%- yard._id %>" role="button">Back to Yard Details</a>
+                </div>
+            </form>
         </div>
-        <div class="form-group">
-            <label for="location">Yard Location</label>
-            <input type="text" class="form-control" id="location" name="location" value="<%= yard.location %>">
-        </div>
-        <div class="form-group">
-            <label for="capacity">Yard Capacity</label>
-            <input type="text" class="form-control" id="capacity" name="capacity" value="<%= yard.capacity %>">
-        </div>
-        <div class="form-group">
-            <label for="status">Yard Status</label>
-            <select name="status" id="status">
-                <% for(let yardStatus of yardStatuses){ %>
-                <option value="<%= yardStatus %>" <% if(yardStatus === yard.status){ %> selected <% } %>><%= yardStatus %></option>
-                <% } %>
-            </select>
-        </div>
-        <button type="submit" class="btn btn-primary mt-3">Submit</button>
-
-    </form>
-
-    <br>
-    <a href="/yard/<%- yard._id %>">Back to Yard Details</a>
-</div>
+    </div>
