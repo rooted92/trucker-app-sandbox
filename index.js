@@ -163,7 +163,7 @@ app.patch('/trailer/:id', validateSchema(trailerSchema), wrapAsync(async (req, r
     // What is new? It is a mongoose option that returns the updated document rather than the original
     // Dont need to save to variable, just awaiting the update
     await Trailer.findByIdAndUpdate(id, req.body, { runValidators: true, new: true })
-    res.redirect('/trailers');
+    res.redirect(`/trailer/${id}`);
 }));
 
 // Delete trailer route
@@ -211,7 +211,7 @@ app.get('/yard/:id/edit', wrapAsync(async (req, res) => {
 app.patch('/yard/:id', validateSchema(yardSchema), wrapAsync(async (req, res) => {
     const { id } = req.params;
     await Yard.findByIdAndUpdate(id, req.body, { runValidators: true, new: true });
-    res.redirect('/yards');
+    res.redirect(`/yard/${id}`);
 }));
 
 // Delte Yard route
