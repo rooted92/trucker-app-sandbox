@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
+const { Schema } = mongoose;
 
 // Create yard schema
 
-const yardSchema = new mongoose.Schema({
+const yardSchema = new Schema({
     name: {
         type: String,
         required: true
@@ -19,7 +20,13 @@ const yardSchema = new mongoose.Schema({
         type: String,
         enum: ['Open', 'Closed'],
         required: true
-    }
+    },
+    trailers: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Trailer'
+        }
+    ]
 });
 
 // Compile yard schema into a model

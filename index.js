@@ -174,6 +174,9 @@ app.delete('/trailer/:id', wrapAsync(async (req, res) => {
 }));
 
 // YARD ROUTES***************************************************************************************
+// If I were to make a trailer count form, would I need to use a different schema? No, you would just need to add a new field to the existing schema
+
+// Would I need to create a new route for the form? Yes, you would need to create a new route for the form. Would it be in the YARD ROUTES? Yes, it would be in the YARD ROUTES
 
 // All Yard route
 app.get('/yards', wrapAsync(async (req, res) => {
@@ -220,6 +223,19 @@ app.delete('/yard/:id', wrapAsync(async (req, res) => {
     await Yard.findByIdAndDelete(id);
     res.redirect('/yards');
 }));
+
+// Trailer Count Form route
+app.get('/yards/:id/trailer-count/new', async (req, res) => {
+    const { id } = req.params;
+    const yard = await Yard.findById(id);
+    console.log(yard)
+    res.render('trailer-count/form.ejs', { yard });
+});
+
+app.post('/yard/:id/trailer-count', wrapAsync(async (req, res) => {
+
+}));
+
 
 // Catch errors
 

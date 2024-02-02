@@ -1,0 +1,23 @@
+<% layout('layouts/boilerplate') %>
+<div class="container flex-grow-1">
+    <div class="row d-flex justify-content-center">
+        <div class="col-6">
+            <h1 class="text-center">Trailer Count</h1>
+            <h2 class="text-center"><%= yard.name %></h2>
+            <form action="/yard" method="POST">
+                <!-- Trailer info inputs
+                - Trailer #  (required)
+                - Trailer Type (Dry Van, Reefer, Flatbed, etc.) (required)
+                - Trailer Length (40', 53', etc.) (required)
+                - Empty or Loaded (required)
+                - Clean or Dirty    (required)
+                - Trailer Status (In Service, Out of Service, In Repair, Docked, etc.)  (required)
+                - Notes (optional)
+                -->
+            </form>
+        </div>
+        <div class="col-6">
+            <h1></h1>
+        </div>
+    </div>
+</div>
