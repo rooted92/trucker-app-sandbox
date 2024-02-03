@@ -218,13 +218,12 @@ app.get('/yards/:id/trailer-count/new', async (req, res) => {
     const { id } = req.params;
     const yard = await Yard.findById(id);
     console.log(yard)
-    res.render('trailer-count/trailer-count-form.ejs', { yard });
+    res.render('trailer-count/trailer-count-form.ejs', { yard, arrays });
 });
 
 app.post('/yard/:id/trailer-count', wrapAsync(async (req, res) => {
 
 }));
-
 
 // Catch errors
 
