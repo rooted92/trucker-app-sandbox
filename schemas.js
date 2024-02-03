@@ -13,10 +13,13 @@ module.exports.driverSchema = driverSchema;
 // Joi schema for trailers
 
 const trailerSchema = Joi.object({
-    trailerId: Joi.string().required(),
-    trailerType: Joi.string().valid('Dry Van', 'Reefer', 'Flatbed', 'Step Deck', 'Double Drop', 'Lowboy', 'Conestoga', 'Power Only', 'Tanker').required(),
-    trailerStatus: Joi.string().valid('Available', 'In Transit', 'Docked').required(),
-    trailerLocation: Joi.string().required()
+    number: Joi.string().required(),
+    type: Joi.string().valid('Dry Van', 'Reefer', 'Flatbed', 'Step Deck', 'Double Drop', 'Lowboy', 'Conestoga', 'Power Only', 'Tanker').required(),
+    length: Joi.number().valid(28, 32, 36, 40, 45, 48, 50, 53).required(),
+    loadStatus: Joi.string().valid('Loaded', 'Empty').required(),
+    cleanliness: Joi.string().valid('Clean', 'Dirty', 'N/A').required(),
+    trailerStatus: Joi.string().valid('Available', 'In Transit', 'Docked', 'In Service', 'Out of Service', 'In Repair').required(),
+    notes: Joi.string(),
 }).required();
 
 module.exports.trailerSchema = trailerSchema;
@@ -27,7 +30,8 @@ const yardSchema = Joi.object({
     name: Joi.string().required(),
     location: Joi.string().required(),
     capacity: Joi.number().required(),
-    status: Joi.string().valid('Open', 'Closed').required()
+    status: Joi.string().valid('Open', 'Closed').required(),
+    // trailers: Joi.array().items(Joi.string()),
 }).required();
 
 module.exports.yardSchema = yardSchema;

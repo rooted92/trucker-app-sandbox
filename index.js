@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
 const ExpressError = require('./utilities/ExpressError.js');
 const wrapAsync = require('./utilities/wrapAsync.js');
+const arrays = require('./utilities/arrays.js');
 
 // Models
 const Driver = require('./models/driver.js'); // Import driver model
@@ -16,18 +17,6 @@ const Yard = require('./models/yard.js'); // Import yard model
 const { driverSchema, trailerSchema, yardSchema } = require('./schemas.js'); // Import schemas
 
 // Arrays for dropdowns
-const trailerTypes = [
-    'Dry Van',
-    'Reefer',
-    'Flatbed',
-    'Step Deck',
-    'Double Drop',
-    'Lowboy',
-    'Conestoga',
-    'Power Only',
-    'Tanker'
-];
-const trailerStatuses = ['Available', 'In Transit', 'Docked'];
 const yardStatuses = ['Open', 'Closed'];
 
 // Connect to MongoDB
@@ -131,7 +120,7 @@ app.get('/trailers', wrapAsync(async (req, res) => {
 
 // Add new trailer route
 app.get('/trailer/new', (req, res) => {
-    res.render('trailers/new-trailer.ejs', { trailerTypes, trailerStatuses });
+    res.render('trailers/new-trailer.ejs', { arrays });
 });
 
 // Create new trailer route
@@ -151,9 +140,9 @@ app.get('/trailer/:id', wrapAsync(async (req, res) => {
 // Edit trailer route
 app.get('/trailer/:id/edit', wrapAsync(async (req, res) => {
     const { id } = req.params;
-    const trailerToUpdate = await Trailer.findById(id);
-    console.log(trailerToUpdate);
-    res.render('trailers/edit-trailer.ejs', { trailerToUpdate, trailerStatuses, trailerTypes });
+    const trailer = await Trailer.findById(id);
+    console.log(trailer.length);
+    res.render('trailers/edit-trailer.ejs', { trailer, arrays });
 }));
 
 // Update trailer route
@@ -186,7 +175,7 @@ app.get('/yards', wrapAsync(async (req, res) => {
 
 // Add new yard route
 app.get('/yard/new', (req, res) => {
-    res.render('yards/new-yard.ejs', { yardStatuses });
+    res.render('yards/new-yard.ejs', { arrays });
 });
 
 // Create new yard route
@@ -229,7 +218,7 @@ app.get('/yards/:id/trailer-count/new', async (req, res) => {
     const { id } = req.params;
     const yard = await Yard.findById(id);
     console.log(yard)
-    res.render('trailer-count/form.ejs', { yard });
+    res.render('trailer-count/trailer-count-form.ejs', { yard });
 });
 
 app.post('/yard/:id/trailer-count', wrapAsync(async (req, res) => {

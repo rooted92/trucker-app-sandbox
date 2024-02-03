@@ -1,28 +1,24 @@
 <% layout('layouts/boilerplate') %>
     <div class="container flex-grow-1">
-
-
-        <div class="container">
-            <div class="row">
-                <div class="col-3">
-                    <h1>Drivers</h1>
-                    <ul class="list-group list-group-flush">
-                        <% for(let i=0; i < drivers.length; i++) { %>
-                            <li class="list-group-item bg-dark text-light">
-                                <div class="ms-2 me-auto">
-                                    <a class="fw-bold link-offset-2-hover link-offset-3" href="/driver/<%= drivers[i]._id %>" title="Click to view driver details">
-                                        <%= drivers[i].name %>
-                                    </a>
-                                    <p>
-                                        <%= drivers[i].company %>
-                                    </p>
-                                </div>
-                            </li>
-                            <% } %>
-                    </ul>
-                    <a class="btn btn-primary mt-3 mb-5" href="/driver/new" role="button">Add New Driver</a>
-                </div>
+        <div class="row">
+            <div class="col-3">
+                <h1>Drivers</h1>
+                <ul class="list-group list-group-flush">
+                    <% for(let i=0; i < drivers.length; i++) { %>
+                        <li class="list-group-item bg-dark text-light">
+                            <div class="ms-2 me-auto">
+                                <a class="fw-bold link-offset-2-hover link-offset-3"
+                                    href="/driver/<%= drivers[i]._id %>" title="Click to view driver details">
+                                    <%= drivers[i].name %>
+                                </a>
+                                <p>
+                                    <%= drivers[i].company %>
+                                </p>
+                            </div>
+                        </li>
+                        <% } %>
+                </ul>
+                <a class="btn btn-primary mt-3 mb-5" href="/driver/new" role="button">Add New Driver</a>
             </div>
-
         </div>
     </div>

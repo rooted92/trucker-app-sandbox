@@ -2,24 +2,38 @@ const mongoose = require('mongoose');
 
 // Create trailer schema
 const trailerSchema = new mongoose.Schema({
-    trailerId: {
+    number: {
         type: String,
         required: true
     },
-    trailerType: {
+    type: {
         type: String,
         enum: ['Dry Van', 'Reefer', 'Flatbed', 'Step Deck', 'Double Drop', 'Lowboy', 'Conestoga', 'Power Only', 'Tanker'],
         required: true
     },
-    trailerStatus: {
-        type: String,
-        enum: ['Available', 'In Transit', 'Docked'],
+    length: {
+        type: Number,
+        enum: [28, 32, 36, 40, 45, 48, 50, 53],
         required: true
     },
-    trailerLocation: {
+    loadStatus: {
         type: String,
+        enum: ['Loaded', 'Empty'],
         required: true
-    }
+    },
+    cleanliness: {
+        type: String,
+        enum: ['Clean', 'Dirty', 'N/A'],
+        required: true
+    },
+    trailerStatus: {
+        type: String,
+        enum: ['Available', 'In Transit', 'Docked', 'In Service', 'Out of Service', 'In Repair'],
+        required: true
+    },
+    notes: {
+        type: String
+    },
 });
 
 // Compile trailer schema into a model

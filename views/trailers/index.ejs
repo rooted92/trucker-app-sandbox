@@ -8,9 +8,9 @@
                         <% for(let trailer of trailers) { %>
                             <li class="list-group-item bg-dark text-light">
                                 <div class="d-flex justify-content-between">
-                                    <a class="fw-bold link-offset-2-hover link-offset-3" href="/trailer/<%= trailer.id %>"
+                                    <a class="fw-bold link-offset-2-hover link-offset-3" href="/trailer/<%= trailer._id %>"
                                         title="Click to view trailer details">
-                                        <%= trailer.trailerId %></a>
+                                        <%= trailer.number %></a>
                                     <p><%= trailer.trailerStatus %></p>
                                 </div>
                             </li>

@@ -38,9 +38,9 @@
                 </div>
                 <div class="col-12 mb-3">
                     <label class="form-label" for="status">Yard Status:</label>
-                    <select class="form-control" name="status" id="status" required>
+                    <select class="form-select" name="status" id="status" aria-label="Select a yard status" required>
                         <option value="">Select status...</option>
-                        <% for(let yardStatus of yardStatuses){ %>
+                        <% for(let yardStatus of arrays.yardStatuses){ %>
                             <option value="<%= yardStatus %>">
                                 <%= yardStatus %>
                             </option>

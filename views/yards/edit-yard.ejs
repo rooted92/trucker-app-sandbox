@@ -6,7 +6,7 @@
                 novalidate>
                 <div class="form-group mb-3">
                     <label class="form-label" for="name">Yard Name</label>
-                    <input class="form-control" type="text" class="form-control" id="name" name="name"
+                    <input class="form-control" type="text" id="name" name="name"
                         value="<%= yard.name %>" required>
                     <div class="invalid-feedback">
                         Field can not be empty!
@@ -17,7 +17,7 @@
                 </div>
                 <div class="form-group mb-3">
                     <label class="form-label" for="location">Yard Location</label>
-                    <input class="form-control" type="text" class="form-control" id="location" name="location"
+                    <input class="form-control" type="text" id="location" name="location"
                         value="<%= yard.location %>" required>
                     <div class="invalid-feedback">
                         Field can not be empty!
@@ -28,7 +28,7 @@
                 </div>
                 <div class="form-group mb-3">
                     <label class="form-label" for="capacity">Yard Capacity</label>
-                    <input class="form-control" type="text" class="form-control" id="capacity" name="capacity"
+                    <input class="form-control" type="text" id="capacity" name="capacity"
                         value="<%= yard.capacity %>" required>
                     <div class="invalid-feedback">
                         Field can not be empty!
@@ -39,7 +39,7 @@
                 </div>
                 <div class="form-group mb-3">
                     <label class="form-label" for="status">Yard Status</label>
-                    <select class="form-control" name="status" id="status" required>
+                    <select class="form-select" name="status" id="status" required>
                         <option value="">Select status...</option>
                         <% for(let yardStatus of yardStatuses){ %>
                             <option value="<%= yardStatus %>" <% if(yardStatus===yard.status){ %> selected <% } %>><%= yardStatus %>
