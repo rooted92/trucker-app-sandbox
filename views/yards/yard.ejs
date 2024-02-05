@@ -6,7 +6,8 @@
         <p><b>Capacity:</b> <%= yard.capacity %></p>
         <p><b>Status:</b> <%= yard.status %></p>
         <h2>Trailers</h2>
-        <ul class="list-group list-group-flush">
+        <ul class="list-group list-group-flush border border-0 ">
+            <li class="list-group-item bg-dark text-light">1006 - Trailer List Demo</li>
             <% for(let trailer of yard.trailers){ %>
                 <li class="ligt-group-item bg-dark text-light"><a class="link-offset-2" href="/trailers/<%= trailer._id %>"><%= trailer.number %></a> - <%= trailer.trailerStatus %></li>
             <% } %>
@@ -18,5 +19,5 @@
         <form class="mt-3" method="POST" action="/yard/<%= yard._id %>?_method=DELETE">
             <input class="btn btn-danger p-1 px-2" type="submit" value="Delete Yard">
         </form>
-        <a class="btn btn-dark border border-light mt-3" href="/yards/<%= yard._id %>/trailer-count/new">Submit a Trailer Count</a>
+        <a class="btn btn-dark border border-light mt-3" href="/yards/<%= yard._id %>/trailers/submission-form">Submit a Trailer Count</a>
     </div>

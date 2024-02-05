@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 // Create trailer schema
-const trailerSchema = new mongoose.Schema({
+const trailerSchema = new Schema({
     number: {
         type: String,
         required: true
@@ -34,6 +35,10 @@ const trailerSchema = new mongoose.Schema({
     notes: {
         type: String
     },
+    yard: {
+        type: Schema.Types.ObjectId,
+        ref: 'Yard',
+    }
 });
 
 // Compile trailer schema into a model

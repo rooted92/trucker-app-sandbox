@@ -37,6 +37,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(methodOverride('_method'));
+app.use(express.static('public'));
 
 // Function to validate schemas using Joi
 const validateSchema = (schema) => {
@@ -214,15 +215,19 @@ app.delete('/yard/:id', wrapAsync(async (req, res) => {
 }));
 
 // Trailer Count Form route
-app.get('/yards/:id/trailer-count/new', async (req, res) => {
+app.get('/yards/:id/trailers/submission-form', async (req, res) => {
     const { id } = req.params;
     const yard = await Yard.findById(id);
-    console.log(yard)
     res.render('trailer-count/trailer-count-form.ejs', { yard, arrays });
 });
 
-app.post('/yard/:id/trailer-count', wrapAsync(async (req, res) => {
-
+app.post('/yards/:id/trailers', wrapAsync(async (req, res) => {
+    const { id } = req.params;
+    const yard = await Yard.findById(id);
+    const trailer = new Trailer(req.body);
+    yard.trailers.push(trailer);
+    console.log(yard);
+    res.send(yard);
 }));
 
 // Catch errors

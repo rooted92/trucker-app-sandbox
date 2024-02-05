@@ -1,21 +1,12 @@
 <% layout('layouts/boilerplate') %>
     <div class="container flex-grow-1">
-        <div class="row d-flex justify-content-evenly">
+        <div class="row d-flex justify-content-evenly my-3">
             <div class="col-5 p-3 border border-light rounded">
                 <h1 class="text-center">Trailer Count</h1>
                 <h2 class="text-center">
                     <%= yard.name %>
                 </h2>
-                <form action="/yards/<%= yard._id %>/trailers" method="POST">
-                    <!-- Trailer info inputs
-                - Trailer #  (required)
-                - Trailer Type (Dry Van, Reefer, Flatbed, etc.) (required)
-                - Trailer Length (40', 53', etc.) (required)
-                - Empty or Loaded (required)
-                - Clean or Dirty    (required)
-                - Trailer Status (In Service, Out of Service, In Repair, Docked, etc.)  (required)
-                - Notes (optional)
-                -->
+                <form action="/yards/<%= yard._id %>/trailers" method="POST" id="trailer-form">
                     <div class="col-12 mb-3">
                         <label class="form-label" for="number">Trailer Number:</label>
                         <input class="form-control" type="text" name="number" id="number"
@@ -123,20 +114,31 @@
                         </div>
                     </div>
                     <div class="col-12 mt-3">
-                        <button class="btn btn-primary" type="submit">Add Trailer</button>
-                        <a class="btn btn-secondary" href="/trailers" role="button">Back to Trailers</a>
+                        <div class="row d-flex justify-content-between">
+                            <div class="col-12 col-md-9">
+                                <button class="btn btn-primary" id="addTrailer">Add Trailer</button>
+                            <a class="btn btn-secondary" href="/trailers" role="button">Back to Trailers</a>
+                            </div>
+                            <div class="col-12 col-md-3 d-flex flex-column align-items-end justify-content-center">
+                                <button class="btn btn-success" type="submit">Submit</button>
+                            </div>
+                        </div>
                     </div>
-                
+                </form>
             </div>
             <div class="col-5 p-3 border border-light rounded">
                 <h1 class="text-center text-success">Trailers Added</h1>
-                <ul>
-                    <% for (let trailer of yard.trailers) { %>
-                        <li>
-                            <%= trailer.trailerNumber %>
-                        </li>
-                        <% } %>
+                <ul id="trailer-list" class="list-group list-group-flush">
+                    <!-- List of trailers added to the form -->
+                    <!-- 
+                        Need to be able to remove trailers from the list
+                        Need to be able to submit the form with the trailers added
+                     -->
+                    <li class="list-group-item bg-dark text-light d-flex justify-content-between px-3">
+                        <p class="m-0 fw-bold">1009 - sample</p>
+                        <button id="deleteTrailer" class="btn btn-sm btn-danger">Delete</button>
+                    </li>
                 </ul>
             </div>
         </div>
-    </div>
+    </div>  
