@@ -2,7 +2,7 @@
 <div class="container flex-grow-1">
     <div class="row d-flex justify-content-center mb-5">
         <h1 class="text-center">Edit Driver</h1>
-        <form action="/driver/<%= driverToUpdate._id %>?_method=PATCH" method="POST" class="col-6 needs-validation" novalidate>
+        <form action="/drivers/<%= driverToUpdate._id %>?_method=PATCH" method="POST" class="col-6 needs-validation" novalidate>
             <div class="row">
                 <div class="col-12 mb-3">
                     <label class="form-label" for="name">Name:</label>
@@ -50,7 +50,7 @@
                 </div>
                 <div class="col-12 mt-3">
                     <button class="btn btn-primary" type="submit">Update Driver</button>
-                    <a class="btn btn-secondary align-self-center" href="/driver/<%= driverToUpdate._id %>" role="button">Back to Driver Details</a>
+                    <a class="btn btn-secondary align-self-center" href="/drivers/<%= driverToUpdate._id %>" role="button">Back to Driver Details</a>
                 </div>
             </div>
         </form>

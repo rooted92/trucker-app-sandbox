@@ -7,14 +7,14 @@ const ejsMate = require('ejs-mate');
 const ExpressError = require('./utilities/ExpressError.js');
 const wrapAsync = require('./utilities/wrapAsync.js');
 const arrays = require('./utilities/arrays.js');
+const driverRoutes = require('./routes/driver.js');
 
 // Models
-const Driver = require('./models/driver.js'); // Import driver model
 const Trailer = require('./models/trailer.js'); // Import trailer model
 const Yard = require('./models/yard.js'); // Import yard model
 
 // Schemas
-const { driverSchema, trailerSchema, yardSchema } = require('./schemas.js'); // Import schemas
+const { trailerSchema, yardSchema } = require('./schemas.js'); // Import schemas
 
 // Arrays for dropdowns
 const yardStatuses = ['Open', 'Closed'];
@@ -59,57 +59,7 @@ app.get('/', (req, res) => {
 
 // DRIVER ROUTES***************************************************************************************
 
-// All Drivers route
-app.get('/drivers', wrapAsync(async (req, res) => {
-    const drivers = await Driver.find({});
-    res.render('drivers/index.ejs', { drivers });
-}));
-
-// Add new driver route
-// A more specific route should be placed above a more general route, so this route should be placed above the view single driver route (see below)
-app.get('/driver/new', (req, res) => {
-    res.render('drivers/new-driver.ejs');
-});
-
-// Create new driver route
-app.post('/drivers', validateSchema(driverSchema), wrapAsync(async (req, res) => {
-    // What is req.body? It is the data that is sent in the POST request from the form
-    const newDriver = new Driver(req.body);
-    // Save the new driver to the database
-    await newDriver.save();
-    // Why do we need async await here? Because we are saving to the database, which is an asynchronous operation
-    // Redirect to the drivers page
-    res.redirect('/drivers');
-}));
-
-// View single driver route
-app.get('/driver/:id', wrapAsync(async (req, res) => {
-    const { id } = req.params;
-    const driver = await Driver.findById(id);
-    res.render('drivers/driver.ejs', { driver });
-}));
-
-// Edit driver route
-app.get('/driver/:id/edit', wrapAsync(async (req, res) => {
-    const { id } = req.params;
-    const driverToUpdate = await Driver.findById(id);
-    res.render('drivers/edit-driver.ejs', { driverToUpdate });
-}));
-
-// Update driver route
-app.patch('/driver/:id', validateSchema(driverSchema), wrapAsync(async (req, res) => {
-    const { id } = req.params;
-    const updateDriver = await Driver.findByIdAndUpdate(id, req.body, { runValidators: true, new: true });
-    res.redirect(`/driver/${updateDriver._id}`);
-}));
-
-// Delete driver route
-app.delete('/driver/:id', wrapAsync(async (req, res) => {
-    const { id } = req.params;
-    // Await the deletion of the driver, then redirect to the drivers page
-    await Driver.findByIdAndDelete(id);
-    res.redirect('/drivers');
-}));
+app.use('/drivers', driverRoutes);
 
 // TRAILER ROUTES***************************************************************************************
 

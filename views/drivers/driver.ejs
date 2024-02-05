@@ -8,9 +8,9 @@
 
     <div class="d-flex justify-content-start">
         <a class="me-3 link-offset-2-hover link-offset-3" href="/drivers">Back to Index</a>
-        <a class="link-offset-2-hover link-offset-3" href="/driver/<%= driver._id %>/edit" >Edit Driver</a>
+        <a class="link-offset-2-hover link-offset-3" href="/drivers/<%= driver._id %>/edit" >Edit Driver</a>
     </div>
-    <form class="my-3" action="/driver/<%= driver._id %>?_method=DELETE" method="POST">
+    <form class="my-3" action="/drivers/<%= driver._id %>?_method=DELETE" method="POST">
         <input class="bg-danger text-light border border-0 rounded p-1 px-2" type="submit" value="Delete Driver">
     </form>
 </div>
