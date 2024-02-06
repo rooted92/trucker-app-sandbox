@@ -7,40 +7,40 @@ const validateSchema = require('../utilities/validateSchema.js');
 const arrays = require('../utilities/arrays.js');
 
 
-// All Trailers route
+// All Trailers
 router.get('/', wrapAsync(async (req, res) => {
     const trailers = await Trailer.find({});
     res.render('trailers/index.ejs', { trailers });
 }));
 
-// Add new trailer route
+// Add new trailer
 router.get('/new', (req, res) => {
     res.render('trailers/new-trailer.ejs', { arrays });
 });
 
-// Create new trailer route
+// Create new trailer 
 router.post('/', validateSchema(trailerSchema), (req, res) => {
     const newTrailer = new Trailer(req.body);
     newTrailer.save();
+    console.log(newTrailer);
     res.redirect('/trailers');
 });
 
-// Single Trailer route
+// Single Trailer
 router.get('/:id', wrapAsync(async (req, res) => {
     const { id } = req.params;
     const trailer = await Trailer.findById(id);
     res.render('trailers/trailer.ejs', { trailer });
 }));
 
-// Edit trailer route
+// Edit trailer
 router.get('/:id/edit', wrapAsync(async (req, res) => {
     const { id } = req.params;
     const trailer = await Trailer.findById(id);
-    console.log(trailer.length);
     res.render('trailers/edit-trailer.ejs', { trailer, arrays });
 }));
 
-// Update trailer route
+// Update trailer
 router.patch('/:id', validateSchema(trailerSchema), wrapAsync(async (req, res) => {
     const { id } = req.params;
     // What is runValidators? It is a mongoose option that runs the validators that are defined in the schema
@@ -50,7 +50,7 @@ router.patch('/:id', validateSchema(trailerSchema), wrapAsync(async (req, res) =
     res.redirect(`/trailers/${id}`);
 }));
 
-// Delete trailer route
+// Delete trailer
 router.delete('/:id', wrapAsync(async (req, res) => {
     const { id } = req.params;
     await Trailer.findByIdAndDelete(id);
