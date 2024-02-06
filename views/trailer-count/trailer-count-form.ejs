@@ -7,10 +7,10 @@
                     <%= yard.name %>
                 </h2>
                 <form class="row needs-validation" data-yard-id="<%= yard._id %>" action="/yards/<%= yard._id %>/trailers" method="POST" id="trailer-form" novalidate>
-                    <div class="col-6 p-5">
+                    <div class="col-12 col-md-6 p-3 p-md-4 p-lg-5">
                         <div class="col-12 mb-3">
                             <label class="form-label" for="number">Trailer Number:</label>
-                            <input class="form-control" type="text" name="number" id="number"
+                            <input class="form-control" type="number" name="number" id="number"
                                 placeholder="Enter trailer number" required>
                             <div class="invalid-feedback">
                                 Field can not be empty!
@@ -110,21 +110,16 @@
                         </div>
                         <div class="col-12 mt-3">
                             <button class="btn btn-primary" id="addTrailerBtn">Add Trailer</button>
-                            <a class="btn btn-secondary" href="/trailers" role="button">Back to Trailers</a>
+                            <a class="btn btn-secondary" href="/yards/<%= yard._id %>" role="button">Cancel</a>
                         </div>
                     </div>
-                    <div class="col-6 p-5 d-flex flex-column">
-                        <h3 class="text-center text-success">Trailers Added</h3>
-                        <ul id="trailer-list" class="list-group list-group-flush">
-                            <!-- List of trailers added to the form -->
+                    <div class="col-12 col-md-6 p-3 p-md-4 p-lg-5 d-flex flex-column">
+                        <h3 class="text-center text-success mb-4">Trailers Added</h3>
+                        <ul id="trailer-list" class="list-group list-unstyled">
                             <!-- 
                                 Need to be able to remove trailers from the list
                                 Need to be able to submit the form with the trailers added
                             -->
-                            <li class="list-group-item bg-dark text-light d-flex justify-content-between px-3">
-                                <p class="m-0 fw-bold">1009 - sample</p>
-                                <button id="deleteBtn" class="btn btn-sm btn-danger">Delete</button>
-                            </li>
                         </ul>
                         <button id="submitBtn" class="btn btn-success mt-auto align-self-start" type="submit">Submit</button>
                     </div>
