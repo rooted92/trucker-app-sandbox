@@ -8,13 +8,15 @@ const ExpressError = require('./utilities/ExpressError.js');
 const wrapAsync = require('./utilities/wrapAsync.js');
 const arrays = require('./utilities/arrays.js');
 const driverRoutes = require('./routes/driver.js');
+const trailerRoutes = require('./routes/trailer.js');
+const yardRoutes = require('./routes/yard.js');
 
 // Models
 const Trailer = require('./models/trailer.js'); // Import trailer model
 const Yard = require('./models/yard.js'); // Import yard model
 
 // Schemas
-const { trailerSchema, yardSchema } = require('./schemas.js'); // Import schemas
+const { yardSchema } = require('./schemas.js'); // Import schemas
 
 // Arrays for dropdowns
 const yardStatuses = ['Open', 'Closed'];
@@ -57,63 +59,14 @@ app.get('/', (req, res) => {
     res.render('dashboard.ejs');
 });
 
-// DRIVER ROUTES***************************************************************************************
-
+// DRIVER ROUTES
 app.use('/drivers', driverRoutes);
 
-// TRAILER ROUTES***************************************************************************************
+// TRAILER ROUTES
+app.use('/trailers', trailerRoutes);
 
-// All Trailers route
-app.get('/trailers', wrapAsync(async (req, res) => {
-    const trailers = await Trailer.find({});
-    res.render('trailers/index.ejs', { trailers });
-}));
+// YARD ROUTES
 
-// Add new trailer route
-app.get('/trailer/new', (req, res) => {
-    res.render('trailers/new-trailer.ejs', { arrays });
-});
-
-// Create new trailer route
-app.post('/trailers', validateSchema(trailerSchema), (req, res) => {
-    const newTrailer = new Trailer(req.body);
-    newTrailer.save();
-    res.redirect('/trailers');
-});
-
-// Single Trailer route
-app.get('/trailer/:id', wrapAsync(async (req, res) => {
-    const { id } = req.params;
-    const trailer = await Trailer.findById(id);
-    res.render('trailers/trailer.ejs', { trailer });
-}));
-
-// Edit trailer route
-app.get('/trailer/:id/edit', wrapAsync(async (req, res) => {
-    const { id } = req.params;
-    const trailer = await Trailer.findById(id);
-    console.log(trailer.length);
-    res.render('trailers/edit-trailer.ejs', { trailer, arrays });
-}));
-
-// Update trailer route
-app.patch('/trailer/:id', validateSchema(trailerSchema), wrapAsync(async (req, res) => {
-    const { id } = req.params;
-    // What is runValidators? It is a mongoose option that runs the validators that are defined in the schema
-    // What is new? It is a mongoose option that returns the updated document rather than the original
-    // Dont need to save to variable, just awaiting the update
-    await Trailer.findByIdAndUpdate(id, req.body, { runValidators: true, new: true })
-    res.redirect(`/trailer/${id}`);
-}));
-
-// Delete trailer route
-app.delete('/trailer/:id', wrapAsync(async (req, res) => {
-    const { id } = req.params;
-    await Trailer.findByIdAndDelete(id);
-    res.redirect('/trailers');
-}));
-
-// YARD ROUTES***************************************************************************************
 // If I were to make a trailer count form, would I need to use a different schema? No, you would just need to add a new field to the existing schema
 
 // Would I need to create a new route for the form? Yes, you would need to create a new route for the form. Would it be in the YARD ROUTES? Yes, it would be in the YARD ROUTES

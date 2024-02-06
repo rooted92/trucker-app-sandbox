@@ -20,7 +20,7 @@ const trailerSchema = Joi.object({
     cleanliness: Joi.string().valid('Clean', 'Dirty', 'N/A').required(),
     trailerStatus: Joi.string().valid('Available', 'In Transit', 'Docked', 'In Service', 'Out of Service', 'In Repair').required(),
     notes: Joi.string(),
-}).required();
+});
 
 module.exports.trailerSchema = trailerSchema;
 

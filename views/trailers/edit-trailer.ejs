@@ -3,7 +3,7 @@
         <div class="row d-flex justify-content-center mb-5">
             <h1 class="text-center">Edit Trailer</h1>
             <form class="col-12 col-md-6 needs-validation" method="POST"
-                action="/trailer/<%= trailer._id %>?_method=PATCH" novalidate>
+                action="/trailers/<%= trailer._id %>?_method=PATCH" novalidate>
                 <div class="row">
                     <div class="col-12 mb-3">
                         <label class="form-label" for="number">Trailer Number:</label>
@@ -18,7 +18,7 @@
                     </div>
                     <div class="col-12 mb-3">
                         <label class="form-label" for="type">Trailer Type:</label>
-                        <select class="form-control" name="type" id="type" required>
+                        <select class="form-select" name="type" id="type" required>
                             <% for(let type of arrays.types){ %>
                                 <option value="<%= type %>" <%= trailer.type === type ? 'selected' : ''; %>>
                                     <%= type %>
@@ -34,7 +34,7 @@
                     </div>
                     <div class="col-12 mb-3">
                         <label class="form-label" for="length">Length:</label>
-                        <select class="form-control" name="length" id="length" required>
+                        <select class="form-select" name="length" id="length" required>
                             <option value="">Select length...</option>
                             <% for(let length of arrays.lengths){ %>
                                 <option value="<%= length %>" <%= trailer.length === length ? 'selected' : ''; %>>
@@ -51,7 +51,7 @@
                     </div>
                     <div class="col-12 mb-3">
                         <label class="form-label" for="loadStatus">Load Status:</label>
-                        <select class="form-control" name="loadStatus" id="loadStatus" required>
+                        <select class="form-select" name="loadStatus" id="loadStatus" required>
                             <option value="">Select load status...</option>
                             <% for(let loadStatus of arrays.loadStatuses){ %>
                                 <option value="<%= loadStatus %>" <%= trailer.loadStatus === loadStatus ? 'selected' : ''; %>>
@@ -68,7 +68,7 @@
                     </div>
                     <div class="col-12 mb-3">
                         <label class="form-label" for="cleanliness">Cleanliness:</label>
-                        <select class="form-control" name="cleanliness" id="cleanliness" required>
+                        <select class="form-select" name="cleanliness" id="cleanliness" required>
                             <option value="">Select load status...</option>
                             <% for(let cleanliness of arrays.cleanlinessStatuses){ %>
                                 <option value="<%= cleanliness %>" <%= trailer.cleanliness === cleanliness ? 'selected' : '' %>>
@@ -85,7 +85,7 @@
                     </div>
                     <div class="col-12 mb-3">
                         <label class="form-label" for="trailerStatus">Trailer Status:</label>
-                        <select class="form-control" name="trailerStatus" id="trailerStatus" required>
+                        <select class="form-select" name="trailerStatus" id="trailerStatus" required>
                             <% for(let trailerStatus of arrays.trailerStatuses){ %>
                                 <option value="<%= trailerStatus %>" <%= trailer.trailerStatus === trailerStatus ? 'selected' : ''; %>>
                                     <%= trailerStatus %>
@@ -111,7 +111,7 @@
                     </div>
                     <div class="col-12 mt-3">
                         <button class="btn btn-primary" type="submit">Update Trailer</button>
-                        <a class="btn btn-secondary align-self-center" href="/trailer/<%= trailer._id %>"
+                        <a class="btn btn-secondary align-self-center" href="/trailers/<%= trailer._id %>"
                             role="button">Back to Trailer Details</a>
                     </div>
                 </div>
