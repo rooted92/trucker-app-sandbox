@@ -3,11 +3,13 @@ const app = express();
 const path = require('path');
 const methodOverride = require('method-override');
 const mongoose = require('mongoose');
+const multer = require('multer');
 const ejsMate = require('ejs-mate');
 const ExpressError = require('./utilities/ExpressError.js');
 const driverRoutes = require('./routes/driver.js');
 const trailerRoutes = require('./routes/trailer.js');
 const yardRoutes = require('./routes/yard.js');
+const upload = multer();
 
 // Connect to MongoDB
 mongoose.connect('mongodb://127.0.0.1:27017/lunaLink')
@@ -24,6 +26,7 @@ app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
+app.use(upload.none());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(methodOverride('_method'));

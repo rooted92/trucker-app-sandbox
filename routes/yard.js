@@ -67,9 +67,7 @@ router.get('/:id/trailers/submission-form', async (req, res) => {
 router.post('/:id/trailers', wrapAsync(async (req, res) => {
     const { id } = req.params;
     const yard = await Yard.findById(id);
-    console.log(req.body);
-    const trailer = new Trailer(req.body);
-    yard.trailers.push(trailer);
+    console.log('Here is request body:', req.body.trailers);
     console.log(yard);
     res.send(yard);
 }));

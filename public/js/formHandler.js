@@ -23,7 +23,26 @@ addTrailerBtn.addEventListener('click', function (e) {
     }
 });
 
-
+submitBtn.addEventListener('click', async function (e) {
+    console.log('submitting');
+    e.preventDefault();
+    console.log(trailers);
+    const trailersJSON = JSON.stringify(trailers);
+    const formData = new FormData(form);
+    formData.append('trailers', trailersJSON);
+    console.log(formData);
+    console.log('Yard ID: ',yardId);
+    try {
+        const response = await fetch(`/yards/${yardId}/trailers`, {
+            method: 'POST',
+            body: formData
+        });
+        const data = await response.json();
+        console.log(data);
+    } catch (err) {
+        console.error(err);
+    }
+});
 
 function updateTrailerList(trailers) {
     trailerList.innerHTML = '';
