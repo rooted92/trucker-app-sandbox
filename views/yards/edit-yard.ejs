@@ -41,8 +41,8 @@
                     <label class="form-label" for="status">Yard Status</label>
                     <select class="form-select" name="status" id="status" required>
                         <option value="">Select status...</option>
-                        <% for(let yardStatus of yardStatuses){ %>
-                            <option value="<%= yardStatus %>" <% if(yardStatus===yard.status){ %> selected <% } %>><%= yardStatus %>
+                        <% for(let yardStatus of arrays.yardStatuses){ %>
+                            <option value="<%= yardStatus %>" <% if(yardStatus === yard.status){ %> selected <% } %>><%= yardStatus %>
                             </option>
                             <% } %>
                     </select>

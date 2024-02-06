@@ -1,5 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const Yard = require('../models/yard.js');
+const Trailer = require('../models/trailer.js');
+const wrapAsync = require('../utilities/wrapAsync.js');
+const { yardSchema } = require('../schemas.js');
+const validateSchema = require('../utilities/validateSchema.js');
+const arrays = require('../utilities/arrays.js');
 
 // If I were to make a trailer count form, would I need to use a different schema? No, you would just need to add a new field to the existing schema
 
@@ -34,7 +40,7 @@ router.get('/:id', wrapAsync(async (req, res) => {
 router.get('/:id/edit', wrapAsync(async (req, res) => {
     const { id } = req.params;
     const yard = await Yard.findById(id);
-    res.render('yards/edit-yard.ejs', { yard, yardStatuses });
+    res.render('yards/edit-yard.ejs', { yard, arrays });
 }));
 
 // Update Yard route

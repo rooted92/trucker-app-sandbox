@@ -1,144 +1,134 @@
 <% layout('layouts/boilerplate') %>
     <div class="container flex-grow-1">
         <div class="row d-flex justify-content-evenly my-3">
-            <div class="col-5 p-3 border border-light rounded">
+            <div class="col-12">
                 <h1 class="text-center">Trailer Count</h1>
                 <h2 class="text-center">
                     <%= yard.name %>
                 </h2>
-                <form action="/yards/<%= yard._id %>/trailers" method="POST" id="trailer-form">
-                    <div class="col-12 mb-3">
-                        <label class="form-label" for="number">Trailer Number:</label>
-                        <input class="form-control" type="text" name="number" id="number"
-                            placeholder="Enter trailer number" required>
-                        <div class="invalid-feedback">
-                            Field can not be empty!
+                <form class="row needs-validation" data-yard-id="<%= yard._id %>" action="/yards/<%= yard._id %>/trailers" method="POST" id="trailer-form" novalidate>
+                    <div class="col-6 p-5">
+                        <div class="col-12 mb-3">
+                            <label class="form-label" for="number">Trailer Number:</label>
+                            <input class="form-control" type="text" name="number" id="number"
+                                placeholder="Enter trailer number" required>
+                            <div class="invalid-feedback">
+                                Field can not be empty!
+                            </div>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
                         </div>
-                        <div class="valid-feedback">
-                            Looks good!
+                        <div class="col-12 mb-3">
+                            <label class="form-label" for="type">Trailer Type:</label>
+                            <select class="form-select" name="type" id="type" required>
+                                <option value="">Select type...</option>
+                                <% for(let type of arrays.types){ %>
+                                    <option value="<%= type %>">
+                                        <%= type %>
+                                    </option>
+                                    <% } %>
+                            </select>
+                            <div class="invalid-feedback">
+                                Field can not be empty!
+                            </div>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-12 mb-3">
-                        <label class="form-label" for="type">Trailer Type:</label>
-                        <select class="form-select" name="type" id="type" required>
-                            <option value="">Select type...</option>
-                            <% for(let type of arrays.types){ %>
-                                <option value="<%= type %>">
-                                    <%= type %>
-                                </option>
-                                <% } %>
-                        </select>
-                        <div class="invalid-feedback">
-                            Field can not be empty!
+                        <div class="col-12 mb-3">
+                            <label class="form-label" for="length">Length:</label>
+                            <select class="form-select" name="length" id="length" required>
+                                <option value="">Select length...</option>
+                                <% for(let length of arrays.lengths){ %>
+                                    <option value="<%= length %>">
+                                        <%= length %>
+                                    </option>
+                                    <% } %>
+                            </select>
+                            <div class="invalid-feedback">
+                                Field can not be empty!
+                            </div>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
                         </div>
-                        <div class="valid-feedback">
-                            Looks good!
+                        <div class="col-12 mb-3">
+                            <label class="form-label" for="loadStatus">Load Status:</label>
+                            <select class="form-select" name="loadStatus" id="loadStatus" required>
+                                <option value="">Select load status...</option>
+                                <% for(let loadStatus of arrays.loadStatuses){ %>
+                                    <option value="<%= loadStatus %>">
+                                        <%= loadStatus %>
+                                    </option>
+                                    <% } %>
+                            </select>
+                            <div class="invalid-feedback">
+                                Field can not be empty!
+                            </div>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-12 mb-3">
-                        <label class="form-label" for="length">Length:</label>
-                        <select class="form-select" name="length" id="length" required>
-                            <option value="">Select length...</option>
-                            <% for(let length of arrays.lengths){ %>
-                                <option value="<%= length %>">
-                                    <%= length %>
-                                </option>
-                                <% } %>
-                        </select>
-                        <div class="invalid-feedback">
-                            Field can not be empty!
+                        <div class="col-12 mb-3">
+                            <label class="form-label" for="cleanliness">Cleanliness:</label>
+                            <select class="form-select" name="cleanliness" id="cleanliness" required>
+                                <option value="">Select cleanliness status...</option>
+                                <% for(let cleanliness of arrays.cleanlinessStatuses){ %>
+                                    <option value="<%= cleanliness %>">
+                                        <%= cleanliness %>
+                                    </option>
+                                    <% } %>
+                            </select>
+                            <div class="invalid-feedback">
+                                Field can not be empty!
+                            </div>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
                         </div>
-                        <div class="valid-feedback">
-                            Looks good!
+                        <div class="col-12 mb-3">
+                            <label class="form-label" for="trailerStatus">Trailer Status:</label>
+                            <select class="form-select" name="trailerStatus" id="trailerStatus" required>
+                                <option value="">Select trailer status...</option>
+                                <% for(let trailerStatus of arrays.trailerStatuses){ %>
+                                    <option value="<%= trailerStatus %>">
+                                        <%= trailerStatus %>
+                                    </option>
+                                    <% } %>
+                            </select>
+                            <div class="invalid-feedback">
+                                Field can not be empty!
+                            </div>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-12 mb-3">
-                        <label class="form-label" for="loadStatus">Load Status:</label>
-                        <select class="form-select" name="loadStatus" id="loadStatus" required>
-                            <option value="">Select load status...</option>
-                            <% for(let loadStatus of arrays.loadStatuses){ %>
-                                <option value="<%= loadStatus %>">
-                                    <%= loadStatus %>
-                                </option>
-                                <% } %>
-                        </select>
-                        <div class="invalid-feedback">
-                            Field can not be empty!
+                        <div class="col-12 mb-3">
+                            <label class="form-label" for="notes">Notes:</label>
+                            <textarea class="form-control" name="notes" id="notes" cols="30" rows="10"></textarea>
                         </div>
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
-                    </div>
-                    <div class="col-12 mb-3">
-                        <label class="form-label" for="cleanliness">Cleanliness:</label>
-                        <select class="form-select" name="cleanliness" id="cleanliness" required>
-                            <option value="">Select cleanliness status...</option>
-                            <% for(let cleanliness of arrays.cleanlinessStatuses){ %>
-                                <option value="<%= cleanliness %>">
-                                    <%= cleanliness %>
-                                </option>
-                                <% } %>
-                        </select>
-                        <div class="invalid-feedback">
-                            Field can not be empty!
-                        </div>
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
-                    </div>
-                    <div class="col-12 mb-3">
-                        <label class="form-label" for="trailerStatus">Trailer Status:</label>
-                        <select class="form-select" name="trailerStatus" id="trailerStatus" required>
-                            <option value="">Select trailer status...</option>
-                            <% for(let trailerStatus of arrays.trailerStatuses){ %>
-                                <option value="<%= trailerStatus %>">
-                                    <%= trailerStatus %>
-                                </option>
-                                <% } %>
-                        </select>
-                        <div class="invalid-feedback">
-                            Field can not be empty!
-                        </div>
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
-                    </div>
-                    <div class="col-12 mb-3">
-                        <label class="form-label" for="notes">Notes:</label>
-                        <textarea class="form-control" name="notes" id="notes" cols="30" rows="10" required></textarea>
-                        <div class="invalid-feedback">
-                            Field can not be empty!
-                        </div>
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
-                    </div>
-                    <div class="col-12 mt-3">
-                        <div class="row d-flex justify-content-between">
-                            <div class="col-12 col-md-9">
-                                <button class="btn btn-primary" id="addTrailer">Add Trailer</button>
+                        <div class="col-12 mt-3">
+                            <button class="btn btn-primary" id="addTrailerBtn">Add Trailer</button>
                             <a class="btn btn-secondary" href="/trailers" role="button">Back to Trailers</a>
-                            </div>
-                            <div class="col-12 col-md-3 d-flex flex-column align-items-end justify-content-center">
-                                <button class="btn btn-success" type="submit">Submit</button>
-                            </div>
                         </div>
+                    </div>
+                    <div class="col-6 p-5 d-flex flex-column">
+                        <h3 class="text-center text-success">Trailers Added</h3>
+                        <ul id="trailer-list" class="list-group list-group-flush">
+                            <!-- List of trailers added to the form -->
+                            <!-- 
+                                Need to be able to remove trailers from the list
+                                Need to be able to submit the form with the trailers added
+                            -->
+                            <li class="list-group-item bg-dark text-light d-flex justify-content-between px-3">
+                                <p class="m-0 fw-bold">1009 - sample</p>
+                                <button id="deleteBtn" class="btn btn-sm btn-danger">Delete</button>
+                            </li>
+                        </ul>
+                        <button id="submitBtn" class="btn btn-success mt-auto align-self-start" type="submit">Submit</button>
                     </div>
                 </form>
             </div>
-            <div class="col-5 p-3 border border-light rounded">
-                <h1 class="text-center text-success">Trailers Added</h1>
-                <ul id="trailer-list" class="list-group list-group-flush">
-                    <!-- List of trailers added to the form -->
-                    <!-- 
-                        Need to be able to remove trailers from the list
-                        Need to be able to submit the form with the trailers added
-                     -->
-                    <li class="list-group-item bg-dark text-light d-flex justify-content-between px-3">
-                        <p class="m-0 fw-bold">1009 - sample</p>
-                        <button id="deleteTrailer" class="btn btn-sm btn-danger">Delete</button>
-                    </li>
-                </ul>
-            </div>
         </div>
-    </div>  
+    </div>
