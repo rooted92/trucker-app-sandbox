@@ -32,7 +32,7 @@ router.post('/', validateSchema(yardSchema), wrapAsync(async (req, res) => {
 // Single Yard route
 router.get('/:id', wrapAsync(async (req, res) => {
     const { id } = req.params;
-    const yard = await Yard.findById(id);
+    const yard = await Yard.findById(id).populate('trailers');
     res.render('yards/yard.ejs', { yard });
 }));
 

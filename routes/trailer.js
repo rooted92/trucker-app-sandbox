@@ -29,7 +29,7 @@ router.post('/', validateSchema(trailerSchema), (req, res) => {
 // Single Trailer
 router.get('/:id', wrapAsync(async (req, res) => {
     const { id } = req.params;
-    const trailer = await Trailer.findById(id);
+    const trailer = await Trailer.findById(id).populate('yard');
     res.render('trailers/trailer.ejs', { trailer });
 }));
 

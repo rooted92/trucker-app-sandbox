@@ -8,6 +8,8 @@
     <p><b>Cleanliness:</b> <%= trailer.cleanliness %></p>
     <p><b>Trailer Status:</b> <%= trailer.trailerStatus %></p>
     <p><b>Notes:</b> <%= trailer.notes %></p>
+    <h2>Yard</h2>
+    <p><b>Last location:</b> <a href="/yards/<%= trailer.yard._id %>"><%= trailer.yard.name %></a></p>
 
     <div class="d-flex justify-content-start">
         <a class="me-3 link-offset-2-hover link-offset-3" href="/trailers">Back to Index</a>
