@@ -7,7 +7,6 @@
         <p><b>Status:</b> <%= yard.status %></p>
         <h2>Trailers</h2>
         <ul class="list-group list-group-flush border border-0 ">
-            <li class="list-group-item bg-dark text-light">1006 - Trailer List Demo</li>
             <% for(let trailer of yard.trailers){ %>
                 <li class="ligt-group-item bg-dark text-light"><a class="link-offset-2" href="/trailers/<%= trailer._id %>"><%= trailer.number %></a> - <%= trailer.trailerStatus %></li>
             <% } %>

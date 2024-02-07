@@ -66,42 +66,24 @@ router.get('/:id/trailers/submission-form', async (req, res) => {
 
 router.post('/:id/trailers', wrapAsync(async (req, res) => {
     const { id } = req.params;
+    const { trailers } = req.body;
     const yard = await Yard.findById(id);
-    console.log('Here is request body:', req.body.trailers);
+    for (let trailer of trailers) {
+        const foundTrailer = await Trailer.findOne({ number: trailer.number });
+        if (!foundTrailer) {
+            const newTrailer = new Trailer(trailer);
+            newTrailer.yard = yard._id;
+            await newTrailer.save();
+            yard.trailers.push(newTrailer);
+        } else {
+            foundTrailer.yard = yard._id;
+            await foundTrailer.save();
+            yard.trailers.push(foundTrailer);
+        }
+    }
+    await yard.save();
     console.log(yard);
-    res.send(yard);
+    res.redirect(`/yards/${id}`);
 }));
-
-// router.post('/:id/trailers', wrapAsync(async (req, res) => {
-//     const { id } = req.params;
-//     const yard = await Yard.findById(id);
-//     const trailerData = req.body.trailers; // Make sure this is an array of trailer objects.
-
-//     // Loop through each trailer object submitted
-//     for (let data of trailerData) {
-//         let trailer;
-//         if (data._id) {
-//             // Update existing trailer and associate it with this yard
-//             trailer = await Trailer.findByIdAndUpdate(data._id, {
-//               ...data,
-//               yard: yard._id // Ensure the yard is associated
-//             }, { new: true });
-//         } else {
-//             // Create a new trailer and associate it with this yard
-//             trailer = new Trailer({
-//               ...data,
-//               yard: yard._id // Ensure the yard is associated
-//             });
-//             await trailer.save();
-//         }
-//         // Add trailer's _id to the yard's trailers array if not already present
-//         if (!yard.trailers.includes(trailer._id)) {
-//             yard.trailers.push(trailer._id);
-//         }
-//     }
-    
-//     await yard.save(); // Save the yard document with the new trailer references
-//     res.redirect(`/yards/${id}`); // Redirect to the yard's detail page, for instance
-// }));
 
 module.exports = router;

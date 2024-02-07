@@ -24,21 +24,18 @@ addTrailerBtn.addEventListener('click', function (e) {
 });
 
 submitBtn.addEventListener('click', async function (e) {
-    console.log('submitting');
     e.preventDefault();
-    console.log(trailers);
-    const trailersJSON = JSON.stringify(trailers);
-    const formData = new FormData(form);
-    formData.append('trailers', trailersJSON);
-    console.log(formData);
-    console.log('Yard ID: ',yardId);
+    const trailersJSON = JSON.stringify({ trailers });
     try {
         const response = await fetch(`/yards/${yardId}/trailers`, {
             method: 'POST',
-            body: formData
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: trailersJSON,
         });
         const data = await response.json();
-        console.log(data);
+        console.log('Here is the data response: ', data);
     } catch (err) {
         console.error(err);
     }
