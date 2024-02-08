@@ -4,7 +4,7 @@
             <div class="col-4">
                 <div class="card text-bg-dark border-secondary">
                     <div class="card-body">
-                        <h5 class="card-title">
+                        <h5 class="card-title fs-3">
                             <%= yard.name %>
                         </h5>
                         <p class="card-text">
@@ -29,14 +29,19 @@
                             Trailers
                         </h5>
                         <ul class="list-group list-group-flush">
-                            <% for(let trailer of yard.trailers){ %>
+                            <% if(yard.trailers.length === 0){ %>
                                 <li class="list-group-item bg-dark border-bottom-0">
-                                    <a href="/trailers/<%= trailer._id %>">
-                                        <%= trailer.number %> - <%= trailer.trailerStatus %>
-                                    </a>
+                                    <p class="text-light">No trailers currently in this yard.</p>
                                 </li>
-
+                            <% } else {%>
+                                <% for(let trailer of yard.trailers){ %>
+                                    <li class="list-group-item bg-dark border-bottom-0">
+                                        <a href="/trailers/<%= trailer._id %>">
+                                            <%= trailer.number %> - <%= trailer.trailerStatus %>
+                                        </a>
+                                    </li>
                                 <% } %>
+                            <% } %>
                         </ul>
                     </div>
                     <div class="card-body border-top">

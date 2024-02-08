@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const Yard = require('./yard.js');
 
 // Create trailer schema
 const trailerSchema = new Schema({
@@ -38,6 +39,14 @@ const trailerSchema = new Schema({
     yard: {
         type: Schema.Types.ObjectId,
         ref: 'Yard',
+    }
+});
+
+trailerSchema.post('findOneAndDelete', async function (trailer) {
+    if (trailer.yard) {
+        const yard = await Yard.findById(trailer.yard);
+        yard.trailers.pull(trailer);
+        await yard.save();
     }
 });
 
