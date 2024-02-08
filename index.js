@@ -31,6 +31,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(methodOverride('_method'));
 app.use(express.static('public'));
+app.use('/font', express.static(__dirname + '/node_modules/bootstrap-icons/font'));
+
 
 // Home route
 app.get('/', (req, res) => {

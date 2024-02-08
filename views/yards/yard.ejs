@@ -1,22 +1,54 @@
 <% layout('layouts/boilerplate') %>
     <div class="container flex-grow-1">
-        <h1>Yard Details</h1>
-        <p><b>Yard Name:</b> <%= yard.name %></p>
-        <p><b>Location:</b> <%= yard.location %></p>
-        <p><b>Capacity:</b> <%= yard.capacity %></p>
-        <p><b>Status:</b> <%= yard.status %></p>
-        <h2>Trailers</h2>
-        <ul class="list-group list-group-flush border border-0 ">
-            <% for(let trailer of yard.trailers){ %>
-                <li class="ligt-group-item bg-dark text-light"><a class="link-offset-2" href="/trailers/<%= trailer._id %>"><%= trailer.number %></a> - <%= trailer.trailerStatus %></li>
-            <% } %>
-        </ul>
-        <div class="d-flex justify-content-start">
-            <a class="me-3 link-offset-2-hover link-offset-3" href="/yards">Back to Index</a>
-            <a class="link-offset-2-hover link-offset-3" href="/yards/<%= yard._id %>/edit" >Edit Yard</a>
+        <div class="row d-flex justify-content-center my-5">
+            <div class="col-4">
+                <div class="card text-bg-dark border-secondary">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <%= yard.name %>
+                        </h5>
+                        <p class="card-text">
+                            <%= yard.location %>
+                        </p>
+                        <div class="d-flex justify-content-start mb-3">
+                            <a class="me-3 link-offset-3-hover link-offset-2" href="/yards"><i
+                                    class="bi bi-arrow-left-short"></i>Back
+                                to Index</a>
+                            <a class="link-offset-3-hover link-offset-2" href="/yards/<%= yard._id %>/edit"><i
+                                    class="bi bi-pencil-square"></i> Edit Yard</a>
+                        </div>
+                        <p class="card-text"><b>Capacity:</b>
+                            <%= yard.capacity %>
+                        </p>
+                        <p class="card-text"><b>Status:</b>
+                            <%= yard.status %>
+                        </p>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            Trailers
+                        </h5>
+                        <ul class="list-group list-group-flush">
+                            <% for(let trailer of yard.trailers){ %>
+                                <li class="list-group-item bg-dark border-bottom-0">
+                                    <a href="/trailers/<%= trailer._id %>">
+                                        <%= trailer.number %> - <%= trailer.trailerStatus %>
+                                    </a>
+                                </li>
+
+                                <% } %>
+                        </ul>
+                    </div>
+                    <div class="card-body border-top">
+                        <form class="mt-3" method="POST" action="/yards/<%= yard._id %>?_method=DELETE">
+                            <button class="btn btn-outline-danger btn-sm me-2 w-100 d-flex justify-content-between"
+                                type="submit">Delete Yard <i class="bi bi-trash"></i></button>
+                        </form>
+                        <a class="btn btn-dark btn-sm border border-light my-3 w-100 d-flex justify-content-between"
+                            href="/yards/<%= yard._id %>/trailers/submission-form">Start Trailer Count <i
+                                class="bi bi-list-check"></i></a>
+                    </div>
+                </div>
+            </div>
         </div>
-        <form class="mt-3" method="POST" action="/yards/<%= yard._id %>?_method=DELETE">
-            <input class="btn btn-danger p-1 px-2" type="submit" value="Delete Yard">
-        </form>
-        <a class="btn btn-dark border border-light my-3" href="/yards/<%= yard._id %>/trailers/submission-form">Submit a Trailer Count</a>
     </div>
