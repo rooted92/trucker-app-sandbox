@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
+const Trailer = require('./trailer.js');
 
 // Create yard schema
 
@@ -27,6 +28,13 @@ const yardSchema = new Schema({
             ref: 'Trailer'
         }
     ]
+});
+
+yardSchema.post('findOneAndDelete', async function (yard) {
+    if (yard.trailers.length) {
+        const res = await Trailer.deleteMany({ _id: { $in: yard.trailers } });
+        console.log(res);
+    }
 });
 
 // Compile yard schema into a model
