@@ -9,7 +9,7 @@ const arrays = require('../utilities/arrays.js');
 
 // All Trailers
 router.get('/', wrapAsync(async (req, res) => {
-    const trailers = await Trailer.find({});
+    const trailers = await Trailer.find({}).populate('yard');
     res.render('trailers/index.ejs', { trailers });
 }));
 
@@ -30,6 +30,7 @@ router.post('/', validateSchema(trailerSchema), (req, res) => {
 router.get('/:id', wrapAsync(async (req, res) => {
     const { id } = req.params;
     const trailer = await Trailer.findById(id).populate('yard');
+    console.log(trailer);
     res.render('trailers/trailer.ejs', { trailer });
 }));
 

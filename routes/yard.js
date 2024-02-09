@@ -47,7 +47,7 @@ router.get('/:id/edit', wrapAsync(async (req, res) => {
 router.patch('/:id', validateSchema(yardSchema), wrapAsync(async (req, res) => {
     const { id } = req.params;
     await Yard.findByIdAndUpdate(id, req.body, { runValidators: true, new: true });
-    res.redirect(`/yard/${id}`);
+    res.redirect(`/yards/${id}`);
 }));
 
 // Delte Yard route

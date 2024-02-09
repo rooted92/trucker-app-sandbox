@@ -29,29 +29,30 @@
                             Trailers
                         </h5>
                         <ul class="list-group list-group-flush">
-                            <% if(yard.trailers.length === 0){ %>
+                            <% if(yard.trailers.length===0){ %>
                                 <li class="list-group-item bg-dark border-bottom-0">
                                     <p class="text-light">No trailers currently in this yard.</p>
                                 </li>
-                            <% } else {%>
-                                <% for(let trailer of yard.trailers){ %>
-                                    <li class="list-group-item bg-dark border-bottom-0">
-                                        <a href="/trailers/<%= trailer._id %>">
-                                            <%= trailer.number %> - <%= trailer.trailerStatus %>
-                                        </a>
-                                    </li>
-                                <% } %>
-                            <% } %>
+                                <% } else {%>
+                                    <% for(let trailer of yard.trailers){ %>
+                                        <li class="list-group-item bg-dark border-bottom-0">
+                                            <a href="/trailers/<%= trailer._id %>">
+                                                <%= trailer.number %> - <%= trailer.trailerStatus %>
+                                            </a>
+                                        </li>
+                                        <% } %>
+                                            <% } %>
                         </ul>
                     </div>
                     <div class="card-body border-top">
+                        <a class="btn btn-dark btn-sm border border-light my-3 w-100 d-flex justify-content-between" href="/yards/<%= yard._id %>/trailers/submission-form">
+                            Start Trailer Count <i class="bi bi-list-check"></i>
+                        </a>
                         <form class="mt-3" method="POST" action="/yards/<%= yard._id %>?_method=DELETE">
-                            <button class="btn btn-outline-danger btn-sm me-2 w-100 d-flex justify-content-between"
-                                type="submit">Delete Yard <i class="bi bi-trash"></i></button>
+                            <button class="btn btn-outline-danger btn-sm me-2 w-100 d-flex justify-content-between" type="submit">
+                                Delete Yard <i class="bi bi-trash"></i>
+                            </button>
                         </form>
-                        <a class="btn btn-dark btn-sm border border-light my-3 w-100 d-flex justify-content-between"
-                            href="/yards/<%= yard._id %>/trailers/submission-form">Start Trailer Count <i
-                                class="bi bi-list-check"></i></a>
                     </div>
                 </div>
             </div>

@@ -3,21 +3,32 @@
         <div class="container">
             <div class="row">
                 <h1>Trailers</h1>
-                <div class="col-12 col-md-6 col-lg-3">
-                    <ul class="list-group list-group-flush">
-                        <% for(let trailer of trailers) { %>
-                            <li class="list-group-item bg-dark text-light">
-                                <div class="d-flex justify-content-between">
-                                    <a class="fw-bold link-offset-2-hover link-offset-3" href="/trailers/<%= trailer._id %>"
-                                        title="Click to view trailer details">
-                                        <%= trailer.number %></a>
-                                    <p><%= trailer.trailerStatus %></p>
-                                </div>
-                            </li>
-                            <% } %>
-                    </ul>
-                    <a class="btn btn-primary mt-3 mb-5" href="/trailers/new">Add New Trailer</a>
-                </div>
             </div>
+            <table class="table table-dark">
+                <thead>
+                  <tr>
+                    <th scope="col">Trailer #</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Length</th>
+                    <th scope="col">Load Status</th>
+                    <th scope="col">Cleanliness</th>
+                    <th scope="col">Trailer Status</th>
+                    <th scope="col">Yard</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <% for(let trailer of trailers){ %>
+                        <tr>
+                            <th scope="row"><a class="link-offset-2" href="/trailers/<%= trailer._id %>"><%= trailer.number %></a></th>
+                            <td><%= trailer.type %></td>
+                            <td><%= trailer.length %></td>
+                            <td><%= trailer.loadStatus %></td>
+                            <td class="<%= trailer.cleanliness === 'Clean' ?  'text-success' : 'text-danger' %>" ><%= trailer.cleanliness %></td>
+                            <td><%= trailer.trailerStatus %></td>
+                            <td><%= !trailer.yard ? 'N/A' : trailer.yard.name %></td>
+                        </tr>
+                    <% } %>
+                </tbody>
+              </table>
         </div>
     </div>

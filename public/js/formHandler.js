@@ -35,9 +35,6 @@ submitBtn.addEventListener('click', async function (e) {
             body: trailersJSON,
         });
         if (response.ok) {
-            // Redirect to the yard page if the server response is successful
-            const data = await response.json();
-            console.log('Here is the data response: ', data);
             window.location.href = `/yards/${yardId}`;
         } else {
             // Handle server errors or unsuccessful operations here
