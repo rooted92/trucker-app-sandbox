@@ -5,10 +5,10 @@
                 <h1 class="m-0">Yards</h1>
                 <a class="btn btn-primary" href="/yards/new">Add New Yard</a>
             </div>
-            <div class="row row-cols-1 row-cols-sm-auto d-flex justify-content-start mx-auto">
+            <div class="row row-cols-1 row-cols-sm-auto d-flex justify-content-start">
                 <% for(let yard of yards) { %>
-                    <div class="col my-2 flex-grow-1 flex-sm-grow-0">
-                        <div class="card text-bg-dark border-0 border-bottom rounded-0">
+                    <div class="col my-2 flex-grow-1 flex-lg-grow-0">
+                        <div class="card text-bg-dark border-light border-3">
                             <div class="card-body">
                                 <h5 class="card-title">
                                     <%= yard.name %>

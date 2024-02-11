@@ -5,6 +5,7 @@ const addTrailerBtn = document.querySelector('#addTrailerBtn');
 const submitBtn = document.querySelector('#submitBtn');
 
 let trailers = [];
+let dbTrailers = [];
 
 addTrailerBtn.addEventListener('click', function (e) {
     e.preventDefault();
