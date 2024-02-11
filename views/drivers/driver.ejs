@@ -1,16 +1,39 @@
 <% layout('layouts/boilerplate') %>
 <div class="container flex-grow-1">
-    <h1>Driver Details</h1>
-    <h2 class="text-success"><%= driver.name %></h2>
-    <p><b>Contact:</b> <%= driver.email %></p>
-    <p><b>Truck #:</b> <%= driver.truckId %></p>
-    <p><b>Drives for:</b> <%= driver.company %></p>
-
-    <div class="d-flex justify-content-start">
-        <a class="me-3 link-offset-2-hover link-offset-3" href="/drivers">Back to Index</a>
-        <a class="link-offset-2-hover link-offset-3" href="/drivers/<%= driver._id %>/edit" >Edit Driver</a>
+    <div class="row border-bottom border-primary border-opacity-50">
+        <div class="col-6 d-flex">
+            <h1>Driver Details</h1>
+        </div>
+        <div class="col-6 d-flex justify-content-end align-items-center"> <a class="me-3 link-offset-2-hover link-offset-3"
+                href="/drivers"><i class="bi bi-arrow-left-short"></i> Back to Index</a>
+            <a class="link-offset-2-hover link-offset-3" href="/drivers/<%= driver._id %>/edit"><i
+                    class="bi bi-pencil-square"></i> Edit</a>
+        </div>
     </div>
-    <form class="my-3" action="/drivers/<%= driver._id %>?_method=DELETE" method="POST">
-        <input class="bg-danger text-light border border-0 rounded p-1 px-2" type="submit" value="Delete Driver">
-    </form>
+
+    <div class="row d-flex justify-content-center my-5">
+        <div class="col-12 col-md-4">
+            <div class="card h-100 bg-dark text-light border-light p-2">
+                <h5 class="card-header border-primary border-opacity-50">
+                    <%= driver.name %>
+                </h5>
+                <div class="card-body">
+                    <p class="card-text">
+                        Contact: <%= driver.email %>
+                    </p>
+                    <p class="card-text">
+                        Truck #: <%= driver.truckId %>
+                    </p>
+                    <p class="card-text">
+                        Company: <%= driver.company %>
+                    </p>
+                    </div>
+
+                    <form method="POST" action="/drivers/<%= driver._id %>?_method=DELETE">
+                        <button class="btn btn-outline-danger">Delete <i class="bi bi-trash"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
