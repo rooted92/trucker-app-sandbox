@@ -13,7 +13,7 @@
 
     <div class="row d-flex justify-content-center my-5">
         <div class="col-12 col-md-4">
-            <div class="card h-100 bg-dark text-light border-light p-2">
+            <div class="card h-100 bg-dark text-light border-light px-4 py-2">
                 <h5 class="card-header border-primary border-opacity-50">
                     <%= driver.name %>
                 </h5>
@@ -30,7 +30,7 @@
                     </div>
 
                     <form method="POST" action="/drivers/<%= driver._id %>?_method=DELETE">
-                        <button class="btn btn-outline-danger">Delete <i class="bi bi-trash"></i></button>
+                        <button class="btn btn-outline-danger mb-2">Delete <i class="bi bi-trash"></i></button>
                     </form>
                 </div>
             </div>

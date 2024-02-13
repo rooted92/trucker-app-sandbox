@@ -10,6 +10,14 @@ const driverRoutes = require('./routes/driver.js');
 const trailerRoutes = require('./routes/trailer.js');
 const yardRoutes = require('./routes/yard.js');
 const upload = multer();
+const flash = require('connect-flash');
+const session = require('express-session');
+
+// Set up session
+const sessionConfig = { secret: 'secretkeyexample', resave: false, saveUninitialized: true, cookie: { httpOnly: true, expires: Date.now() + 1000 * 60 * 60 * 24 * 7, maxAge: 1000 * 60 * 60 * 24 * 7 } }
+
+app.use(session(sessionConfig));
+app.use(flash());// all request will have access to flash
 
 // Connect to MongoDB
 mongoose.connect('mongodb://127.0.0.1:27017/lunaLink')
@@ -32,6 +40,12 @@ app.use(express.json());
 app.use(methodOverride('_method'));
 app.use(express.static('public'));
 app.use('/font', express.static(__dirname + '/node_modules/bootstrap-icons/font'));
+
+// Middleware to display flash messages in all routes, template, and views
+app.use((req, res, next) => {
+    res.locals.messages = req.flash('success');
+    next();
+});
 
 
 // Home route
