@@ -26,6 +26,7 @@ router.get('/new', (req, res) => {
 router.post('/', validateSchema(yardSchema), wrapAsync(async (req, res) => {
     const newYard = new Yard(req.body);
     await newYard.save();
+    req.flash('success', 'Successfully added a new yard!');
     res.redirect('/yards');
 }));
 
@@ -33,6 +34,10 @@ router.post('/', validateSchema(yardSchema), wrapAsync(async (req, res) => {
 router.get('/:id', wrapAsync(async (req, res) => {
     const { id } = req.params;
     const yard = await Yard.findById(id).populate('trailers');
+    if(!yard) {
+        req.flash('error', 'Cannot find that yard!');
+        return res.redirect('/yards');
+    }
     res.render('yards/yard.ejs', { yard });
 }));
 
@@ -40,6 +45,10 @@ router.get('/:id', wrapAsync(async (req, res) => {
 router.get('/:id/edit', wrapAsync(async (req, res) => {
     const { id } = req.params;
     const yard = await Yard.findById(id);
+    if(!yard) {
+        req.flash('error', 'Cannot find that yard!');
+        return res.redirect('/yards');
+    }
     res.render('yards/edit-yard.ejs', { yard, arrays });
 }));
 
@@ -47,13 +56,15 @@ router.get('/:id/edit', wrapAsync(async (req, res) => {
 router.patch('/:id', validateSchema(yardSchema), wrapAsync(async (req, res) => {
     const { id } = req.params;
     await Yard.findByIdAndUpdate(id, req.body, { runValidators: true, new: true });
+    req.flash('success', 'Successfully updated yard!');
     res.redirect(`/yards/${id}`);
 }));
 
-// Delte Yard route
+// Delete Yard route
 router.delete('/:id', wrapAsync(async (req, res) => {
     const { id } = req.params;
     await Yard.findByIdAndDelete(id);
+    req.flash('success', 'Successfully deleted yard!');
     res.redirect('/yards');
 }));
 
@@ -82,7 +93,7 @@ router.post('/:id/trailers', wrapAsync(async (req, res) => {
         }
     }
     await yard.save();
-    console.log(yard);
+    req.flash('success', 'Successfully added trailers to yard!');
     res.redirect(`/yards/${id}`);
 }));
 

@@ -40,6 +40,10 @@ router.post('/', validateSchema(driverSchema), wrapAsync(async (req, res) => {
 router.get('/:id', wrapAsync(async (req, res) => {
     const { id } = req.params;
     const driver = await Driver.findById(id);
+    if(!driver) {
+        req.flash('error', 'Cannot find that driver!');
+        return res.redirect('/drivers');
+    }
     res.render('drivers/driver.ejs', { driver });
 }));
 
@@ -47,6 +51,10 @@ router.get('/:id', wrapAsync(async (req, res) => {
 router.get('/:id/edit', wrapAsync(async (req, res) => {
     const { id } = req.params;
     const driverToUpdate = await Driver.findById(id);
+    if(!driverToUpdate) {
+        req.flash('error', 'Cannot find that driver!');
+        return res.redirect('/drivers');
+    }
     res.render('drivers/edit-driver.ejs', { driverToUpdate });
 }));
 
@@ -54,6 +62,7 @@ router.get('/:id/edit', wrapAsync(async (req, res) => {
 router.patch('/:id', validateSchema(driverSchema), wrapAsync(async (req, res) => {
     const { id } = req.params;
     const updateDriver = await Driver.findByIdAndUpdate(id, req.body, { runValidators: true, new: true });
+    req.flash('success', 'Successfully updated driver!');
     res.redirect(`/drivers/${updateDriver._id}`);
 }));
 
@@ -62,6 +71,7 @@ router.delete('/:id', wrapAsync(async (req, res) => {
     const { id } = req.params;
     // Await the deletion of the driver, then redirect to the drivers page
     await Driver.findByIdAndDelete(id);
+    req.flash('success', 'Successfully deleted driver!');
     res.redirect('/drivers');
 }));
 

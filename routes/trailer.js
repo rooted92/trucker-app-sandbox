@@ -22,7 +22,7 @@ router.get('/new', (req, res) => {
 router.post('/', validateSchema(trailerSchema), (req, res) => {
     const newTrailer = new Trailer(req.body);
     newTrailer.save();
-    console.log(newTrailer);
+    req.flash('success', 'Successfully added a new trailer!');
     res.redirect('/trailers');
 });
 
@@ -30,7 +30,10 @@ router.post('/', validateSchema(trailerSchema), (req, res) => {
 router.get('/:id', wrapAsync(async (req, res) => {
     const { id } = req.params;
     const trailer = await Trailer.findById(id).populate('yard');
-    console.log(trailer);
+    if(!trailer) {
+        req.flash('error', 'Cannot find that trailer!');
+        return res.redirect('/trailers');
+    }
     res.render('trailers/trailer.ejs', { trailer });
 }));
 
@@ -38,6 +41,10 @@ router.get('/:id', wrapAsync(async (req, res) => {
 router.get('/:id/edit', wrapAsync(async (req, res) => {
     const { id } = req.params;
     const trailer = await Trailer.findById(id);
+    if(!trailer) {
+        req.flash('error', 'Cannot find that trailer!');
+        return res.redirect('/trailers');
+    }
     res.render('trailers/edit-trailer.ejs', { trailer, arrays });
 }));
 
@@ -47,7 +54,8 @@ router.patch('/:id', validateSchema(trailerSchema), wrapAsync(async (req, res) =
     // What is runValidators? It is a mongoose option that runs the validators that are defined in the schema
     // What is new? It is a mongoose option that returns the updated document rather than the original
     // Dont need to save to variable, just awaiting the update
-    await Trailer.findByIdAndUpdate(id, req.body, { runValidators: true, new: true })
+    await Trailer.findByIdAndUpdate(id, req.body, { runValidators: true, new: true });
+    req.flash('success', 'Successfully updated trailer!');
     res.redirect(`/trailers/${id}`);
 }));
 
@@ -55,6 +63,7 @@ router.patch('/:id', validateSchema(trailerSchema), wrapAsync(async (req, res) =
 router.delete('/:id', wrapAsync(async (req, res) => {
     const { id } = req.params;
     await Trailer.findByIdAndDelete(id);
+    req.flash('success', 'Successfully deleted trailer!');
     res.redirect('/trailers');
 }));
 

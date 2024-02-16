@@ -40,7 +40,7 @@
                                 <% } else {%>
                                     <% for(let trailer of yard.trailers){ %>
                                         <li class="list-group-item bg-dark border-bottom-0">
-                                            <a href="/trailers/<%= trailer._id %>">
+                                            <a class="link-offset-2-hover link-offset-3" href="/trailers/<%= trailer._id %>">
                                                 <%= trailer.number %> - <%= trailer.trailerStatus %>
                                             </a>
                                         </li>
