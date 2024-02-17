@@ -9,6 +9,7 @@ const ExpressError = require('./utilities/ExpressError.js');
 const driverRoutes = require('./routes/driver.js');
 const trailerRoutes = require('./routes/trailer.js');
 const yardRoutes = require('./routes/yard.js');
+const userRoutes = require('./routes/user.js');
 const upload = multer();
 const flash = require('connect-flash');
 const session = require('express-session');
@@ -61,6 +62,9 @@ app.use('/trailers', trailerRoutes);
 
 // YARD ROUTES
 app.use('/yards', yardRoutes);
+
+// USER ROUTES
+app.use('/users', userRoutes);
 
 // Catch errors
 app.all('*', (req, res, next) => {

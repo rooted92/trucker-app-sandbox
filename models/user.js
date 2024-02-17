@@ -15,7 +15,7 @@ const userSchema = new Schema({
         required: true
     },
     phone: {
-        type: string,
+        type: String,
         required: true
     },
     role: {
@@ -27,7 +27,9 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    joinCode: String,
+    joinCode: {
+        type: String,
+    }
 });
 
 const User = mongoose.model('User', userSchema);
