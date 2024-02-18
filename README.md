@@ -1,6 +1,6 @@
 # Luna Link Documentation
 
-As a former truck driver, I created Luna Link to address the inefficiencies of manual trailer counts, a time-consuming task that involved tracking trailer details by hand. Luna Link revolutionizes fleet management by enabling drivers to submit digital reports on trailers, providing dispatch with real-time updates. This solution streamlines communication between drivers and dispatch, significantly improving operational efficiency and accuracy. Developed from direct experience, Luna Link is designed to make fleet operations smoother and more efficient for everyone involved.
+As a former truck driver, I created Luna Link to address the inefficiencies of manual trailer counts, a time-consuming task that involved tracking trailer details by hand. Luna Link improves fleet management by enabling drivers to submit digital reports on trailers, providing dispatch with real-time updates. This solution streamlines communication between drivers and dispatch, significantly improving operational efficiency and accuracy. Developed from direct experience, Luna Link is designed to make fleet operations smoother and more efficient for everyone involved.
 
 ## Installation
 
