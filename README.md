@@ -19,7 +19,7 @@ To run the project, follow these steps:
    Run `node seeds.js` or `nodemon seeds.js` to seed the database with initial data.
 
 5. **Start the Server**:
-   Launch the server on localhost:3000 using `nodemon index.js` or `node index.js`.
+   Launch the server on localhost:3000 using `nodemon index.js` or `node index.js`. If you used `nodemon` to seed the database make sure quit the REPL first with `ctrl + C`.
 
 ## Usage
 
