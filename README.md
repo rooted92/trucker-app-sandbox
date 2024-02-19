@@ -1,6 +1,6 @@
-# Mini Project Documentation
+# Luna Link Documentation
 
-This Luna Link (formerly Fleet Finder - [frontend](https://github.com/rooted92/frontendFF) | [backend](https://github.com/rooted92/backendFF)) mini project showcases basic CRUD functionality using Express.js, MongoDB, Mongoose, EJS, Bootstrap, and Method Override.
+As a former truck driver, I created Luna Link to address the inefficiencies of manual trailer counts, a time-consuming task that involved tracking trailer details by hand. Luna Link improves fleet management by enabling drivers to submit digital reports on trailers, providing dispatch with real-time updates. This solution streamlines communication between drivers and dispatch, significantly improving operational efficiency and accuracy. Developed from direct experience, Luna Link is designed to make fleet operations smoother and more efficient for everyone involved.
 
 ## Installation
 
