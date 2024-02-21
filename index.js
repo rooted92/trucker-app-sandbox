@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const PORT = 8080;
 const path = require('path');
 const methodOverride = require('method-override');
 const mongoose = require('mongoose');
@@ -42,7 +43,7 @@ app.use(methodOverride('_method'));
 app.use(express.static('public'));
 app.use('/font', express.static(__dirname + '/node_modules/bootstrap-icons/font'));
 
-// Middleware to display flash messages in all routes, template, and views
+// Middleware to display flash messages in all routes, templates, and views
 app.use((req, res, next) => {
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
@@ -51,7 +52,7 @@ app.use((req, res, next) => {
 
 // Home route
 app.get('/', (req, res) => {
-    res.render('dashboard.ejs');
+    res.render('home.ejs');
 });
 
 // DRIVER ROUTES
@@ -78,6 +79,6 @@ app.use((err, req, res, next) => {
 });
 
 // Start server
-app.listen(3000, () => {
-    console.log("App is listening on port 3000");
+app.listen(PORT, () => {
+    console.log(`Listening on port ${PORT}`);
 });

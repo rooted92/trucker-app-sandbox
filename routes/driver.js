@@ -33,7 +33,7 @@ router.post('/', validateSchema(driverSchema), wrapAsync(async (req, res) => {
     // Why do we need async await here? Because we are saving to the database, which is an asynchronous operation
     req.flash('success', 'Successfully added a new driver!');// this line alone does not display the message, it just adds it to the session
     // Redirect to the drivers page
-    res.redirect('/drivers');
+    res.redirect('/drivers');  
 }));
 
 // View single driver route
