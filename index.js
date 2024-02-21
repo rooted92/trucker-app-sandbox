@@ -14,12 +14,27 @@ const userRoutes = require('./routes/user.js');
 const upload = multer();
 const flash = require('connect-flash');
 const session = require('express-session');
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
+
+const User = require('./models/user.js');
 
 // Set up session
 const sessionConfig = { secret: 'secretkeyexample', resave: false, saveUninitialized: true, cookie: { httpOnly: true, expires: Date.now() + 1000 * 60 * 60 * 24 * 7, maxAge: 1000 * 60 * 60 * 24 * 7 } }
 
 app.use(session(sessionConfig));
 app.use(flash());// all request will have access to flash
+
+// Set up passport
+app.use(passport.initialize());
+app.use(passport.session());
+// The method 'authenticate' is located on User model automatically via passportLocalMongoose and used in the LocalStrategy
+passport.use(new LocalStrategy(User.authenticate()));
+
+// How to store a user in the session, we use the serializeUser method from passportLocalMongoose
+passport.serializeUser(User.serializeUser());
+// How to get a user out of the session, we use the deserializeUser method from passportLocalMongoose
+passport.deserializeUser(User.deserializeUser());
 
 // Connect to MongoDB
 mongoose.connect('mongodb://127.0.0.1:27017/lunaLink')

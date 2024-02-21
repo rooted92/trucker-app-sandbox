@@ -4,38 +4,81 @@
         <h2 class="border-bottom border-primary border-opacity-75 pb-3 mb-3">Sign Up</h2>
         <div class="row justify-content-center align-items-center mb-5">
             <div class="col-12 col-md-4 col-sm-6">
-                <form action="/createUser" method="POST">
+                <form action="/createUser" method="POST" class="needs-validation" novalidate>
                     <div class="mb-3">
                         <label for="username" class="form-label">Username</label>
                         <input type="text" class="form-control" id="username" name="username" required>
+                        <div class="invalid-feedback">
+                            Field can not be empty!
+                        </div>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
                         <input type="password" class="form-control" id="password" name="password" required>
+                        <div class="invalid-feedback">
+                            Field can not be empty!
+                        </div>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
                         <input type="email" class="form-control" id="email" name="email" required>
+                        <div class="invalid-feedback">
+                            Field can not be empty or enter valid email!
+                        </div>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="phone" class="form-label">Phone</label>
                         <input type="tel" class="form-control" id="phone" name="phone" required>
+                        <div class="invalid-feedback">
+                            Field can not be empty!
+                        </div>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="role" class="form-label">Role</label>
                         <select class="form-select" id="role" name="role" required>
+                            <option value="" selected>Select Role...</option>
                             <option value="admin">Admin</option>
                             <option value="driver">Driver</option>
                             <option value="dispatcher">Dispatcher</option>
                         </select>
+                        <div class="invalid-feedback">
+                            Please select a role!
+                        </div>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="companyName" class="form-label">Company Name</label>
                         <input type="text" class="form-control" id="companyName" name="companyName" required>
+                        <div class="invalid-feedback">
+                            Field can not be empty!
+                        </div>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-3" id="joinCodeField">
                         <label for="joinCode" class="form-label">Join Code</label>
                         <input type="text" class="form-control" id="joinCode" name="joinCode" required>
+                        <div class="invalid-feedback">
+                            Field can not be empty!
+                        </div>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
                     </div>
                     <button type="submit" class="btn btn-success">Sign Up</button>
                 </form>
