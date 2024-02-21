@@ -11,6 +11,11 @@
                     <%= error %>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
+            <% } else if(greet && greet.length ){%>
+                <div class="alert alert-secondary alert-dismissible fade show" role="alert">
+                    <%= greet %>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
             <% } %>
         </div>
     </div>

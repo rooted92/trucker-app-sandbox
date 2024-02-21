@@ -24,8 +24,8 @@ router.post('/signup', validateSchema(userSchema), wrapAsync(async (req, res, ne
         const registeredUser = await User.register(user, password);
         req.login(registeredUser, err => {
             if (err) return next(err);
-            req.flash('success', `Welcome to LunaLink! ${registeredUser.role === 'admin' ? `Your Join Code is: ${registeredUser.joinCode}. Please share this code with your team so they can join your organization on Luna Link.` : ''}`);
-            res.redirect('/users/login');
+            req.flash('greet', `Welcome to LunaLink! ${registeredUser.role === 'admin' ? `Your Join Code is: ${registeredUser.joinCode}. Please share this code with your team so they can join your organization on Luna Link.` : ''}`);
+            res.redirect('/users/dashboard');
         });
     } catch (e) {
         req.flash('error', e.message);
@@ -46,7 +46,7 @@ router.post('/login',
             keepSessionInfo: true
         }),
     (req, res) => {
-        req.flash('success', `Welcome back, ${req.body.username}!`);
+        req.flash('greet', `Welcome back, ${req.body.username}!`);
         const redirectUrl = req.session.returnTo || '/users/dashboard';
         res.redirect(redirectUrl);
     });
@@ -65,7 +65,7 @@ router.get('/logout', isLoggedIn, (req, res) => {
         if (err) {
             return next(err);
         }
-        req.flash('success', 'Goodbye!');
+        req.flash('greet', 'Goodbye!');
         res.redirect('/');
     });
 });
