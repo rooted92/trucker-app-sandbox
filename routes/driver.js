@@ -4,13 +4,6 @@ const Driver = require('../models/driver');
 const wrapAsync = require('../utilities/wrapAsync.js');
 const { driverSchema } = require('../schemas.js');
 const validateSchema = require('../utilities/validateSchema.js');
-const flash = require('connect-flash');
-const session = require('express-session');
-
-// Set up session
-const sessionConfig = { secret: 'secretkeyexample', resave: false, saveUninitialized: true, cookie: { httpOnly: true, expires: Date.now() + 1000 * 60 * 60 * 24 * 7, maxAge: 1000 * 60 * 60 * 24 * 7 } }
-router.use(session(sessionConfig));
-router.use(flash());// all request will have access to flash
 
 // All Drivers route
 router.get('/', wrapAsync(async (req, res) => {

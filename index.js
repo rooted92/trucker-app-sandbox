@@ -60,6 +60,8 @@ app.use('/font', express.static(__dirname + '/node_modules/bootstrap-icons/font'
 
 // Middleware to display flash messages in all routes, templates, and views
 app.use((req, res, next) => {
+    res.locals.currentUser = req.user;
+    console.log('Current user in Index.js: ', res.locals.currentUser);
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
     next();

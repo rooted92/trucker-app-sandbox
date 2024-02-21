@@ -6,6 +6,7 @@ const wrapAsync = require('../utilities/wrapAsync.js');
 const { yardSchema } = require('../schemas.js');
 const validateSchema = require('../utilities/validateSchema.js');
 const arrays = require('../utilities/arrays.js');
+const { isLoggedIn } = require('../utilities/middleware.js');
 
 // If I were to make a trailer count form, would I need to use a different schema? No, you would just need to add a new field to the existing schema
 
@@ -18,7 +19,7 @@ router.get('/', wrapAsync(async (req, res) => {
 }));
 
 // Add new yard route
-router.get('/new', (req, res) => {
+router.get('/new', isLoggedIn, (req, res) => {
     res.render('yards/new-yard.ejs', { arrays });
 });
 
@@ -42,7 +43,7 @@ router.get('/:id', wrapAsync(async (req, res) => {
 }));
 
 // Edit Yard route
-router.get('/:id/edit', wrapAsync(async (req, res) => {
+router.get('/:id/edit', isLoggedIn, wrapAsync(async (req, res) => {
     const { id } = req.params;
     const yard = await Yard.findById(id);
     if(!yard) {
@@ -69,7 +70,7 @@ router.delete('/:id', wrapAsync(async (req, res) => {
 }));
 
 // Trailer Count Form route
-router.get('/:id/trailers/submission-form', async (req, res) => {
+router.get('/:id/trailers/submission-form', isLoggedIn, async (req, res) => {
     const { id } = req.params;
     const yard = await Yard.findById(id);
     res.render('trailer-count/trailer-count-form.ejs', { yard, arrays });

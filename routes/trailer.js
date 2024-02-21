@@ -5,6 +5,7 @@ const wrapAsync = require('../utilities/wrapAsync.js');
 const { trailerSchema } = require('../schemas.js');
 const validateSchema = require('../utilities/validateSchema.js');
 const arrays = require('../utilities/arrays.js');
+const { isLoggedIn } = require('../utilities/middleware.js');
 
 
 // All Trailers
@@ -14,7 +15,7 @@ router.get('/', wrapAsync(async (req, res) => {
 }));
 
 // Add new trailer
-router.get('/new', (req, res) => {
+router.get('/new', isLoggedIn, (req, res) => {
     res.render('trailers/new-trailer.ejs', { arrays });
 });
 
