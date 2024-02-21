@@ -8,7 +8,7 @@ const joinCodeHandler = require('../utilities/joinCodeHandler.js');
 
 const User = require('../models/user');
 const passport = require('passport');
-const { isLoggedIn } = require('../utilities/middleware.js');
+const { isLoggedIn, storeReturnTo } = require('../utilities/middleware.js');
 
 router.get('/signup', (req, res, next) => {
     res.render('users/signup.ejs');
@@ -24,7 +24,6 @@ router.post('/signup', validateSchema(userSchema), wrapAsync(async (req, res, ne
         const registeredUser = await User.register(user, password);
         req.login(registeredUser, err => {
             if (err) return next(err);
-            console.log(registeredUser);
             req.flash('success', `Welcome to LunaLink! ${registeredUser.role === 'admin' ? `Your Join Code is: ${registeredUser.joinCode}. Please share this code with your team so they can join your organization on Luna Link.` : ''}`);
             res.redirect('/users/login');
         });
@@ -39,15 +38,17 @@ router.get('/login', (req, res, next) => {
 });
 
 router.post('/login',
+    storeReturnTo,
     passport.authenticate('local',
         {
             failureFlash: true,
-            failureRedirect: '/login',
+            failureRedirect: '/users/login',
             keepSessionInfo: true
         }),
-    (req, res, next) => {
+    (req, res) => {
         req.flash('success', `Welcome back, ${req.body.username}!`);
-        res.redirect('/users/dashboard');
+        const redirectUrl = req.session.returnTo || '/users/dashboard';
+        res.redirect(redirectUrl);
     });
 
 router.get('/account', (req, res, next) => {
@@ -60,7 +61,6 @@ router.get('/dashboard', (req, res, next) => {
 
 router.get('/logout', isLoggedIn, (req, res) => {
     // req.logout is a method that comes from passport and requires a callback function to handle any errors
-    console.log('TOP - User in logout route', req.user);
     req.logout(function (err) {
         if (err) {
             return next(err);
@@ -68,7 +68,6 @@ router.get('/logout', isLoggedIn, (req, res) => {
         req.flash('success', 'Goodbye!');
         res.redirect('/');
     });
-    console.log('BOTTOM - User in logout route', req.user);
 });
 
 module.exports = router;
