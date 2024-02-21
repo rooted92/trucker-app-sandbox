@@ -29,19 +29,17 @@ router.get('/login', (req, res, next) => {
     res.render('users/login.ejs');
 });
 
-router.post('/signup', validateSchema(userSchema), wrapAsync(async (req, res, next) => {
-    const { username, email, phone, role, companyName, password } = req.body;
+router.post('/signup', async (req, res, next) => {
+    let { username, email, phone, role, companyName, joinCode, password } = req.body;
     if(role === 'admin') {
-        // If the user is an admin, we will generate a join code for them
-        const user = new User({ username, email, phone, role, companyName, joinCode: joinCodeHandler()});
-    } else {
-        // If the user is not an admin, we will not generate a join code for them, but require them to enter a join code. The join code will be used to join the company and it will be stored in the admin's user document. This creates an association between the admin and the user. Each admin will represent one company, and each user will belong to one company. The join code will be used to create this association.
-        const user = new User({ username, email, phone, role, companyName, joinCode});
+        joinCode = joinCodeHandler();
     }
-    const newUser = await User.register(user, password);
-    req.flash('success', 'Welcome to LunaLink!');
-    res.redirect('/dashboard');
-}));
+    const user = new User({ username, email, phone, role, companyName, joinCode });
+    const registeredUser = await User.register(user, password);
+    console.log(registeredUser);
+    req.flash('success', `Welcome to LunaLink! ${registeredUser.role === 'admin' ? `Your Join Code is: ${registeredUser.joinCode}. Please share this code with your team so they can join your organization on Luna Link.` : ''}`);
+    res.redirect('/users/login');
+});
 
 router.get('/account', (req, res, next) => {
     res.render('users/account.ejs')
