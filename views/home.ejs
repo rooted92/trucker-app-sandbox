@@ -1,18 +1,48 @@
 <% layout('layouts/boilerplate') %>
-    <div class="container flex-grow-1">
-        <section class="container mt-5">
-            <div class="row justify-content-center">
-                <div class="col-md-8 text-center">
-                    <h2 class="display-4 mb-3">Welcome to Luna Link</h2>
-                    <p class="lead">Your Guiding Light in Transportation Management.</p>
-                    <p>At Luna Link, we streamline the complexities of logistics with intuitive, innovative
-                        solutions. Our platform connects drivers, dispatchers, and managers, ensuring seamless
-                        communication and efficient operations. Whether it's tracking trailers, managing fleets, or
-                        navigating routes, Luna Link is your trusted partner in the transportation journey. Join us
-                        as we revolutionize the way you move, guided by the clarity and precision of Luna Link. Your
-                        journey, illuminated.</p>
-                    <a href="/users/signup" class="btn btn-primary mt-4">Get Started Today</a>
+<div class="container flex-grow-1">
+    <div class="container-fluid bg-dark text-white mb-5">
+        <div class="row text-center">
+            <div class="col-lg-12">
+                <h2 class="display-4 mb-3">Welcome to Luna Link</h2>
+                <p class="lead mb-5">Your Guiding Light in Transportation Management.</p>
+            </div>
+        </div>
+        <div class="row row-cols-1 row-cols-md-3">
+            <!-- Card 1 -->
+            <div class="col mb-3">
+                <div class="card h-100 bg-secondary text-white">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Seamless Communication</h5>
+                        <p class="card-text">Connect drivers, dispatchers, and managers with efficient operations and seamless communication.</p>
+                        <img src="/images/chat-speech-bubble-svgrepo-com.svg" alt="" class="card-icon img-fluid mt-auto">
+                    </div>
                 </div>
             </div>
-        </section>
+            <!-- Card 2 -->
+            <div class="col mb-3">
+                <div class="card h-100 bg-secondary text-white">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Fleet Management, Mastered</h5>
+                        <p class="card-text">Whether it's tracking trailers, managing fleets, or navigating routes, Luna Link is your trusted partner in the transportation journey.</p>
+                        <img src="/images/truck-svgrepo-com.svg" alt="" class="card-icon mt-auto">
+                    </div>
+                </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="col mb-3">
+                <div class="card h-100 bg-secondary text-white">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Effortless Trailer Tracking</h5>
+                        <p class="card-text">Upgrade to Luna Link's digital tracking for instant, automated trailer updates—no pens, paper, or phone calls necessary.</p>
+                        <img src="/images/map-gps-svgrepo-com.svg" alt="" class="card-icon mt-auto">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center my-3">
+            <a href="/users/signup" class="btn btn-primary w-auto">
+                Get Started!
+            </a>
+        </div>
     </div>
+</div>
